@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlipUp Deals – Beste Amazon Deals täglich</title>
+  <meta name="description" content="Die besten Amazon Deals aus allen EU-Marktplätzen – täglich kuratiert von FlipUp." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #f5f5f5;
+      color: #111;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo-box {
+      background: #9d0208;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: #111;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-name span { color: #9d0208; }
+
+    .affiliate-note {
+      font-size: 11px;
+      color: #999;
+    }
+
+    /* NAV */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      height: 44px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: #555;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.12s;
+    }
+
+    .nav-btn:hover { background: #f0f0f0; color: #111; }
+    .nav-btn.active { background: #9d0208; color: #fff; }
+
+    /* HERO TEXT */
+    .hero {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 14px;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* AFFILIATE NOTICE */
+    .affiliate-bar {
+      background: #fffbeb;
+      border-bottom: 1px solid #fde68a;
+      padding: 8px 2rem;
+      font-size: 12px;
+      color: #92400e;
+      text-align: center;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .deal-count {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: #16a34a;
+      font-weight: 500;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #16a34a;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e5e5e5;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .card-body {
+      padding: 0.875rem;
+      border-top: 1px solid #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .card-market {
+      font-size: 11px;
+      color: #999;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #111;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .card-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .card-discount {
+      font-size: 12px;
+      font-weight: 600;
+      background: #fef2f2;
+      color: #9d0208;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .card-old {
+      font-size: 12px;
+      color: #aaa;
+      text-decoration: line-through;
+    }
+
+    .card-found {
+      font-size: 11px;
+      color: #bbb;
+    }
+
+    .card-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.12s;
+      margin-top: auto;
+    }
+
+    .card-btn:hover { background: #9d0208; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #e5e5e5;
+      background: #fff;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    footer p { font-size: 12px; color: #999; }
+
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-size: 12px; color: #999; text-decoration: none; }
+    .footer-links a:hover { color: #111; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 1.25rem; }
+      main { padding: 1rem 1rem 3rem; }
+      header { padding: 0 1rem; }
+      nav { padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <div class="logo-box">FU</div>
+    <div class="logo-name">FlipUp <span>Deals</span></div>
+  </a>
+  <span class="affiliate-note">* Affiliate Links</span>
+</header>
+
+<nav>
+  <button class="nav-btn active" onclick="filterDeals('all',this)">Alle</button>
+  <button class="nav-btn" onclick="filterDeals('de',this)">🇩🇪 Amazon.de</button>
+  <button class="nav-btn" onclick="filterDeals('fr',this)">🇫🇷 Amazon.fr</button>
+  <button class="nav-btn" onclick="filterDeals('it',this)">🇮🇹 Amazon.it</button>
+  <button class="nav-btn" onclick="filterDeals('es',this)">🇪🇸 Amazon.es</button>
+  <button class="nav-btn" onclick="filterDeals('nl',this)">🇳🇱 Amazon.nl</button>
+  <button class="nav-btn" onclick="filterDeals('pl',this)">🇵🇱 Amazon.pl</button>
+  <button class="nav-btn" onclick="filterDeals('se',this)">🇸🇪 Amazon.se</button>
+</nav>
+
+<div class="hero">
+  <h1>FlipUp Deals</h1>
+  <p>Willkommen bei FlipUp Deals – deiner ersten Anlaufstelle für die besten Amazon Deals aus allen EU-Marktplätzen. Täglich kuratiert von unserem Team.</p>
+</div>
+
+<div class="affiliate-bar">
+  * Einige Links auf dieser Seite sind Affiliate-Links. Bei einem Kauf erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten.
+</div>
+
+<main>
+  <div class="meta-row">
+    <span class="deal-count" id="count">0 Deals</span>
+    <span class="live"><span class="live-dot"></span>Live</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
+  <div class="footer-links">
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="/agb.html">AGB</a>
+  </div>
+</footer>
+
+<script>
+  const FLAGS = { de:'🇩🇪', fr:'🇫🇷', it:'🇮🇹', es:'🇪🇸', nl:'🇳🇱', pl:'🇵🇱', se:'🇸🇪', at:'🇦🇹' };
+
+  // Trag hier später deine echten Affiliate-Tags ein
+  const TAGS = {
+    de: 'flipupdeals-21',
+    fr: 'flipupdeals0f-21',
+    it: 'flipupdeals0i-21',
+    es: 'flipupdeals0e-21',
+    nl: 'flipupdeals0n-21',
+    pl: 'flipupdeals0p-21',
+    se: 'flipupdeals0s-21',
+    at: 'flipupdeals0a-21',
+  };
+
+  function ago(mins) {
+    return new Date(Date.now() - mins * 60000).toISOString();
+  }
+
+  const DEMO = [
+    { id:1, title:"Philips Hue White & Color Ambiance E27 Starter Set, 3 Lampen + Bridge", price:89.99, oldPrice:139.99, image:"https://m.media-amazon.com/images/I/71rpu9GQJKL._SL500_.jpg", marketplace:"de", asin:"B07QXLQC3S", foundAt:ago(14) },
+    { id:2, title:"Anker PowerCore 26800 Portable Charger, Externer Akku, 3 Ausgänge", price:39.99, oldPrice:59.99, image:"https://m.media-amazon.com/images/I/61oqwLwpHfL._SL500_.jpg", marketplace:"de", asin:"B01JIWQPMW", foundAt:ago(32) },
+    { id:3, title:"adidas Herren Ultraboost 22 Laufschuhe, Core Black, 42 EU", price:74.95, oldPrice:179.95, image:"https://m.media-amazon.com/images/I/71tHBFQJY5L._SL500_.jpg", marketplace:"fr", asin:"B09TPKN7GZ", foundAt:ago(55) },
+    { id:4, title:"Bosch Professional GSR 12V-35 Akku-Bohrschrauber inkl. 2x Akku & Ladegerät", price:69.00, oldPrice:109.00, image:"https://m.media-amazon.com/images/I/71JlRInfVdL._SL500_.jpg", marketplace:"de", asin:"B086W1GJ9C", foundAt:ago(80) },
+    { id:5, title:"Levi's 501 Original Jeans, Medium Indigo Worn In, 32W / 32L", price:44.50, oldPrice:89.95, image:"https://m.media-amazon.com/images/I/71HxQ3KHXKL._SL500_.jpg", marketplace:"it", asin:"B076BYVLH8", foundAt:ago(110) },
+    { id:6, title:"Samsung Galaxy Buds2 Pro, True Wireless Earbuds, ANC, 360 Audio, Graphite", price:109.00, oldPrice:229.00, image:"https://m.media-amazon.com/images/I/61LPdTaFHwL._SL500_.jpg", marketplace:"es", asin:"B0B2KMMQ2L", foundAt:ago(145) },
+    { id:7, title:"Apple AirPods Pro (2. Generation) mit MagSafe Ladecase (USB-C)", price:189.00, oldPrice:279.00, image:"https://m.media-amazon.com/images/I/61SUj2aKoEL._SL500_.jpg", marketplace:"de", asin:"B0CHWRXH8B", foundAt:ago(200) },
+    { id:8, title:"Tefal Ingenio Preference Topfset 13-teilig, Antihaft, Induktion geeignet", price:79.99, oldPrice:149.99, image:"https://m.media-amazon.com/images/I/71U2GWFFLBL._SL500_.jpg", marketplace:"nl", asin:"B009Y0IBIU", foundAt:ago(240) },
+  ];
+
+  let all = [], current = 'all';
+
+  async function load() {
+    try {
+      const r = await fetch('/api/deals.json');
+      if (r.ok) { all = await r.json(); }
+      else throw 0;
+    } catch { all = DEMO; }
+    render();
+  }
+
+  function render() {
+    const list = current === 'all' ? all : all.filter(d => d.marketplace === current);
+    document.getElementById('count').textContent = `${list.length} Deal${list.length !== 1 ? 's' : ''}`;
+
+    if (!list.length) {
+      document.getElementById('grid').innerHTML = `<p style="color:#999;font-size:14px;grid-column:1/-1;padding:2rem 0">Keine Deals für diesen Marktplatz.</p>`;
+      return;
+    }
+
+    document.getElementById('grid').innerHTML = list.map(d => {
+      const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
+      const flag = FLAGS[d.marketplace] || '';
+      const tag = TAGS[d.marketplace] || 'flipupdeals-21';
+      const url = `https://www.amazon.${d.marketplace}/dp/${d.asin}?tag=${tag}&linkCode=ogi&th=1&psc=1`;
+      const date = new Date(d.foundAt).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+      return `
+        <div class="card">
+          <img class="card-img" src="${d.image}" alt="${d.title}" loading="lazy"
+            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>'" />
+          <div class="card-body">
+            <div class="card-market">${flag} amazon.${d.marketplace}</div>
+            <div class="card-title">${d.title}</div>
+            <div class="card-price-row">
+              <div>
+                <div class="card-price">€${d.price.toFixed(2)}</div>
+                ${d.oldPrice ? `<div class="card-old">€${d.oldPrice.toFixed(2)}</div>` : ''}
+              </div>
+              ${pct ? `<div class="card-discount">-${pct}%</div>` : ''}
+            </div>
+            <div class="card-found">· Found at: ${date}</div>
+            <a class="card-btn" href="${url}" target="_blank" rel="nofollow sponsored">
+              Get Deal ${flag}
+            </a>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function filterDeals(market, btn) {
+    current = market;
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }
+
+  load();
+  setInterval(load, 60000);
+</script>
+</body>
+</html>
