@@ -314,9 +314,6 @@
   <button class="nav-btn" onclick="filterDeals('fr',this)">🇫🇷 Amazon.fr</button>
   <button class="nav-btn" onclick="filterDeals('it',this)">🇮🇹 Amazon.it</button>
   <button class="nav-btn" onclick="filterDeals('es',this)">🇪🇸 Amazon.es</button>
-  <button class="nav-btn" onclick="filterDeals('nl',this)">🇳🇱 Amazon.nl</button>
-  <button class="nav-btn" onclick="filterDeals('pl',this)">🇵🇱 Amazon.pl</button>
-  <button class="nav-btn" onclick="filterDeals('se',this)">🇸🇪 Amazon.se</button>
 </nav>
 
 <div class="hero">
@@ -348,16 +345,12 @@
 <script>
   const FLAGS = { de:'🇩🇪', fr:'🇫🇷', it:'🇮🇹', es:'🇪🇸', nl:'🇳🇱', pl:'🇵🇱', se:'🇸🇪', at:'🇦🇹' };
 
-  // Trag hier später deine echten Affiliate-Tags ein
   const TAGS = {
     de: 'flipupdeals-21',
-    fr: 'flipupdeals0f-21',
-    it: 'flipupdeals0i-21',
-    es: 'flipupdeals0e-21',
-    nl: 'flipupdeals0n-21',
-    pl: 'flipupdeals0p-21',
-    se: 'flipupdeals0s-21',
-    at: 'flipupdeals0a-21',
+    fr: 'flipupdeals06-21',
+    it: 'flipupdeal00a-21',
+    es: 'flipupdeals0a-21',
+    at: 'flipupdeals-21',   // update wenn AT freigeschaltet
   };
 
   function ago(mins) {
@@ -372,7 +365,6 @@
     { id:5, title:"Levi's 501 Original Jeans, Medium Indigo Worn In, 32W / 32L", price:44.50, oldPrice:89.95, image:"https://m.media-amazon.com/images/I/71HxQ3KHXKL._SL500_.jpg", marketplace:"it", asin:"B076BYVLH8", foundAt:ago(110) },
     { id:6, title:"Samsung Galaxy Buds2 Pro, True Wireless Earbuds, ANC, 360 Audio, Graphite", price:109.00, oldPrice:229.00, image:"https://m.media-amazon.com/images/I/61LPdTaFHwL._SL500_.jpg", marketplace:"es", asin:"B0B2KMMQ2L", foundAt:ago(145) },
     { id:7, title:"Apple AirPods Pro (2. Generation) mit MagSafe Ladecase (USB-C)", price:189.00, oldPrice:279.00, image:"https://m.media-amazon.com/images/I/61SUj2aKoEL._SL500_.jpg", marketplace:"de", asin:"B0CHWRXH8B", foundAt:ago(200) },
-    { id:8, title:"Tefal Ingenio Preference Topfset 13-teilig, Antihaft, Induktion geeignet", price:79.99, oldPrice:149.99, image:"https://m.media-amazon.com/images/I/71U2GWFFLBL._SL500_.jpg", marketplace:"nl", asin:"B009Y0IBIU", foundAt:ago(240) },
   ];
 
   let all = [], current = 'all';
@@ -398,7 +390,6 @@
     document.getElementById('grid').innerHTML = list.map(d => {
       const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
       const flag = FLAGS[d.marketplace] || '';
-      const tag = TAGS[d.marketplace] || 'flipupdeals-21';
       const url = `https://www.amazon.${d.marketplace}/dp/${d.asin}?tag=${tag}&linkCode=ogi&th=1&psc=1`;
       const date = new Date(d.foundAt).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
       return `
