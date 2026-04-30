@@ -391,7 +391,7 @@
     document.getElementById('grid').innerHTML = list.map(d => {
       const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
       const flag = FLAGS[d.marketplace] || '';
-      const url = `/deal.html?asin=${d.asin}&marketplace=${d.marketplace}`;
+      const url = `/deal.html?asin=${d.asin}&marketplace=${d.sell_marketplace || d.marketplace}&ek=${d.marketplace}`;
       const date = new Date(d.foundAt).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
       return `
         <div class="card">
