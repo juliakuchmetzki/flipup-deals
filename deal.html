@@ -82,6 +82,7 @@
       border-radius: 4px;
     }
 
+    /* Primärer Button – Amazon (orange) */
     .btn-primary {
       display: flex;
       align-items: center;
@@ -100,6 +101,7 @@
     }
     .btn-primary:hover { background: #e68a00; }
 
+    /* Sekundärer Button – zweites Amazon Land (grau) */
     .btn-secondary {
       display: flex;
       align-items: center;
@@ -115,9 +117,28 @@
       font-weight: 600;
       border: 1px solid #e5e5e5;
       transition: background 0.12s;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.75rem;
     }
     .btn-secondary:hover { background: #f5f5f5; }
+
+    /* Alza Button – blau */
+    .btn-alza {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: #0055a5;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.12s;
+      margin-bottom: 0.75rem;
+    }
+    .btn-alza:hover { background: #00408a; }
 
     .disclosure {
       font-size: 11px;
@@ -179,7 +200,7 @@
     const params = new URLSearchParams(window.location.search);
     const asin = params.get('asin');
     const marketplace = params.get('marketplace') || 'de';
-    const ekMarketplace = params.get('ek') || marketplace; // EK-Marktplatz (günstigstes Land)
+    const ekMarketplace = params.get('ek') || marketplace;
 
     if (!asin) {
       document.getElementById('card').innerHTML = '<div class="loading">Kein Deal gefunden.</div>';
@@ -204,19 +225,27 @@
     const ekDomain = DOMAINS[ekMarketplace] || domain;
 
     // Affiliate URLs
-    const deUrl = `https://www.${domain}/dp/${asin}?tag=${tag}&linkCode=ogi&th=1&psc=1`;
-    const ekUrl = `https://www.${ekDomain}/dp/${asin}?tag=${ekTag}&linkCode=ogi&th=1&psc=1`;
+    const mainUrl = `https://www.${domain}/dp/${asin}?tag=${tag}&linkCode=ogi&th=1&psc=1`;
+    const ekUrl   = `https://www.${ekDomain}/dp/${asin}?tag=${ekTag}&linkCode=ogi&th=1&psc=1`;
 
-    const title = deal?.title || 'Produkt auf Amazon ansehen';
-    const price = deal?.price ? `€${deal.price.toFixed(2)}` : null;
+    const title    = deal?.title    || 'Produkt auf Amazon ansehen';
+    const price    = deal?.price    ? `€${deal.price.toFixed(2)}`    : null;
     const oldPrice = deal?.oldPrice ? `€${deal.oldPrice.toFixed(2)}` : null;
-    const pct = (deal?.price && deal?.oldPrice) ? Math.round((1 - deal.price/deal.oldPrice)*100) : null;
-    const image = deal?.image || `https://m.media-amazon.com/images/I/${asin}._SL500_.jpg`;
+    const pct      = (deal?.price && deal?.oldPrice) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : null;
+    const image    = deal?.image    || `https://m.media-amazon.com/images/I/${asin}._SL500_.jpg`;
 
-    // Titel setzen
-    document.title = `${title.substring(0,60)} – FlipUp Deals`;
+    // Alza Link – direkt aus deals.json (wird vom Bot gesetzt)
+    const alzaLink = deal?.alza_link || null;
 
+    document.title = `${title.substring(0, 60)} – FlipUp Deals`;
+
+    // EK-Button nur anzeigen wenn anderes Land als Haupt-Marketplace
     const showEkButton = ekMarketplace !== marketplace;
+
+    // Disclosure-Text: Amazon + ggf. Alza
+    const disclosureAmazon = '* Als Amazon-Affiliate-Partner verdienen wir an qualifizierten Verkäufen.';
+    const disclosureAlza   = alzaLink ? ' Für Alza-Links gilt ebenfalls eine Affiliate-Partnerschaft.' : '';
+    const disclosureSuffix = ' Für dich entstehen keine Mehrkosten.';
 
     document.getElementById('card').innerHTML = `
       <a href="/" class="back-link">← Zurück zu allen Deals</a>
@@ -231,7 +260,7 @@
       </div>` : ''}
       <div class="asin-row">ASIN: ${asin}</div>
 
-      <a class="btn-primary" href="${deUrl}" target="_blank" rel="nofollow sponsored">
+      <a class="btn-primary" href="${mainUrl}" target="_blank" rel="nofollow sponsored">
         ${flag} Bei ${domain} ansehen →
       </a>
 
@@ -240,9 +269,13 @@
         ${ekFlag} Günstigster Preis bei ${ekDomain} →
       </a>` : ''}
 
+      ${alzaLink ? `
+      <a class="btn-alza" href="${alzaLink}" target="_blank" rel="nofollow sponsored">
+        🔵 Auch bei Alza ansehen →
+      </a>` : ''}
+
       <div class="disclosure">
-        * Als Amazon-Affiliate-Partner verdienen wir an qualifizierten Verkäufen.
-        Für dich entstehen keine Mehrkosten.
+        ${disclosureAmazon}${disclosureAlza}${disclosureSuffix}
       </div>
     `;
   }
