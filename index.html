@@ -311,10 +311,11 @@
 
 <nav>
   <button class="nav-btn active" onclick="filterDeals('all',this)">Alle</button>
-  <button class="nav-btn" onclick="filterDeals('de',this)">🇩🇪 Amazon.de</button>
-  <button class="nav-btn" onclick="filterDeals('fr',this)">🇫🇷 Amazon.fr</button>
-  <button class="nav-btn" onclick="filterDeals('it',this)">🇮🇹 Amazon.it</button>
-  <button class="nav-btn" onclick="filterDeals('es',this)">🇪🇸 Amazon.es</button>
+  <button class="nav-btn" onclick="filterDeals('elektronik',this)">💻 Elektronik</button>
+  <button class="nav-btn" onclick="filterDeals('haushalt',this)">🏠 Haushalt</button>
+  <button class="nav-btn" onclick="filterDeals('sport',this)">🏃 Sport</button>
+  <button class="nav-btn" onclick="filterDeals('mode',this)">👗 Mode</button>
+  <button class="nav-btn" onclick="filterDeals('sonstiges',this)">📦 Sonstiges</button>
 </nav>
 
 <div class="hero">
@@ -380,7 +381,7 @@
   }
 
   function render() {
-    const list = current === 'all' ? all : all.filter(d => d.marketplace === current);
+    const list = current === 'all' ? all : all.filter(d => d.kategorie === current);
     document.getElementById('count').textContent = `${list.length} Deal${list.length !== 1 ? 's' : ''}`;
 
     if (!list.length) {
@@ -398,7 +399,7 @@
           <img class="card-img" src="${d.image}" alt="${d.title}" loading="lazy"
             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>'" />
           <div class="card-body">
-            <div class="card-market">${flag} amazon.${d.marketplace}</div>
+            <div class="card-market">${flag} amazon.${d.ek_marketplace || d.marketplace}${d.kategorie ? ` · ${d.kategorie.charAt(0).toUpperCase() + d.kategorie.slice(1)}` : ''}</div>
             <div class="card-title">${d.title}</div>
             <div class="card-price-row">
               <div>
@@ -417,12 +418,12 @@
     }).join('');
   }
 
-  function filterDeals(market, btn) {
-    current = market;
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    render();
-  }
+  function filterDeals(kat, btn) {
+  current = kat;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
 
   load();
   setInterval(load, 60000);
