@@ -392,15 +392,16 @@
 
     document.getElementById('grid').innerHTML = list.map(d => {
       const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
-      const flag = FLAGS[d.marketplace] || '';
-      const url = `/deal.html?asin=${d.asin}&marketplace=${d.sell_marketplace || d.marketplace}&ek=${d.marketplace}`;
+      const ekMarket = d.ek_marketplace || d.marketplace;
+      const flag = FLAGS[ekMarket] || '';
+      const url = `/deal.html?asin=${d.asin}&marketplace=${d.sell_marketplace || d.marketplace}&ek=${ekMarket}`;
       const date = new Date(d.foundAt).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
       return `
         <div class="card">
           <img class="card-img" src="${d.image}" alt="${d.title}" loading="lazy"
             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>'" />
           <div class="card-body">
-            <div class="card-market">${flag} amazon.${d.ek_marketplace || d.marketplace}${d.kategorie ? ` · ${d.kategorie.charAt(0).toUpperCase() + d.kategorie.slice(1)}` : ''}</div>
+            <div class="card-market">${flag} amazon.${ekMarket}${d.kategorie ? ` · ${d.kategorie.charAt(0).toUpperCase() + d.kategorie.slice(1)}` : ''}</div>
             <div class="card-title">${d.title}</div>
             <div class="card-price-row">
               <div>
