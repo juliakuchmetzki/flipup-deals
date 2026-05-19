@@ -193,36 +193,40 @@
     at: 'flipupdeals-21',
   };
 
-  async function loadDeal() {
+ async function loadDeal() {
     const params = new URLSearchParams(window.location.search);
     const asin = params.get('asin');
+    const urlEk = params.get('ek') || 'de';
 
-    if (!asin) {
-      document.getElementById('card').innerHTML = '<div class="loading">Kein Deal gefunden.</div>';
-      return;
-    }
-
-    // Deal aus API laden — immer marketplace=de suchen (so wird es jetzt gespeichert)
+    // Deal aus API laden
     let deal = null;
     try {
       const r = await fetch('https://api.flipup-deals.de/api/deals.json');
       if (r.ok) {
         const deals = await r.json();
-        deal = deals.find(d => d.asin === asin && d.marketplace === 'de');
-        // Fallback: irgendein Deal mit dieser ASIN
-        if (!deal) deal = deals.find(d => d.asin === asin);
+        if (asin && asin !== 'null') {
+          deal = deals.find(d => d.asin === asin && d.marketplace === 'de');
+          if (!deal) deal = deals.find(d => d.asin === asin);
+        }
       }
     } catch {}
 
-    // EK-Marktplatz: aus deals.json (ek_marketplace) oder URL-Parameter als Fallback
-    const urlEk = params.get('ek') || 'de';
-    const ekMarketplace = deal?.ek_marketplace || urlEk;
+    // Shop-Deal: direkt weiterleiten
+    if (deal?.shop && deal?.url) {
+      window.location.href = deal.url;
+      return;
+    }
 
+    if (!asin || asin === 'null') {
+      document.getElementById('card').innerHTML = '<div class="loading">Kein Deal gefunden.</div>';
+      return;
+    }
+
+    const ekMarketplace = deal?.ek_marketplace || urlEk;
     const ekTag    = TAGS[ekMarketplace] || TAGS.de;
     const ekFlag   = FLAGS[ekMarketplace] || '🛒';
     const ekDomain = DOMAINS[ekMarketplace] || 'amazon.de';
 
-    // Affiliate URLs
     const ekUrl = `https://www.${ekDomain}/dp/${asin}?tag=${ekTag}&linkCode=ogi&th=1&psc=1`;
     const deUrl = `https://www.amazon.de/dp/${asin}?tag=${TAGS.de}&linkCode=ogi&th=1&psc=1`;
 
@@ -235,9 +239,7 @@
 
     document.title = `${title.substring(0, 60)} – FlipUp Deals`;
 
-    // DE-Button nur anzeigen wenn EK-Marktplatz nicht DE ist
     const showDeButton = ekMarketplace !== 'de';
-
     const disclosureAlza = alzaLink ? ' Für Alza-Links gilt ebenfalls eine Affiliate-Partnerschaft.' : '';
 
     document.getElementById('card').innerHTML = `
