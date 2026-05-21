@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Über uns – FlipUp Deals</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="description" content="Erfahre mehr über FlipUp Deals – wer wir sind, wie wir Deals kuratieren und was die FlipUp Community ausmacht." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f5f5f5; color: #111; font-family: 'Inter', sans-serif; min-height: 100vh; }
+    header {
+      background: #fff; border-bottom: 1px solid #e5e5e5;
+      padding: 0 2rem; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-name { font-weight: 700; font-size: 16px; color: #111; }
+    .logo-name span { color: #9d0208; }
+    main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+    .subtitle { font-size: 15px; color: #666; margin-bottom: 3rem; }
+    .section { margin-bottom: 2.5rem; }
+    .section h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: #111; }
+    .section p { font-size: 14px; line-height: 1.8; color: #444; }
+    .shops { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1rem; }
+    .shop-tag {
+      background: #fff; border: 1px solid #e5e5e5;
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 13px; font-weight: 500; color: #111;
+    }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 1rem; }
+    .stat {
+      background: #fff; border: 1px solid #e5e5e5;
+      border-radius: 10px; padding: 1.25rem; text-align: center;
+    }
+    .stat-number { font-size: 1.75rem; font-weight: 700; color: #9d0208; }
+    .stat-label { font-size: 12px; color: #999; margin-top: 4px; }
+    .discord-box {
+      background: #5865F2; color: #fff;
+      border-radius: 10px; padding: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1rem; text-decoration: none;
+      transition: background 0.12s;
+    }
+    .discord-box:hover { background: #4752c4; }
+    .discord-box div { font-size: 14px; line-height: 1.6; }
+    .discord-box strong { font-size: 16px; display: block; margin-bottom: 4px; }
+    footer {
+      border-top: 1px solid #e5e5e5; background: #fff;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.75rem;
+    }
+    footer p { font-size: 12px; color: #999; }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-size: 12px; color: #999; text-decoration: none; }
+    .footer-links a:hover { color: #111; }
+    @media (max-width: 600px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      main { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <img src="https://i.ibb.co/GBfz3qm/flipuplogo.png" alt="FlipUp" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" />
+    <div class="logo-name">FlipUp <span>Deals</span></div>
+  </a>
+</header>
+
+<main>
+  <h1>Über uns</h1>
+  <p class="subtitle">Wer steckt hinter FlipUp Deals – und wie funktioniert das Ganze?</p>
+
+  <div class="section">
+    <h2>Was ist FlipUp Deals?</h2>
+    <p>FlipUp Deals ist ein shopübergreifender Deal-Aggregator, der täglich die besten Angebote aus verschiedenen Online-Shops aufspürt und übersichtlich an einem Ort präsentiert. Wir durchsuchen kontinuierlich die Angebote von Coolblue, Euronics, Notebooksbilliger, Expert, Otto, Amazon und weiteren Händlern – damit du nichts verpasst.</p>
+  </div>
+
+  <div class="section">
+    <h2>Unsere Partner-Shops</h2>
+    <p>Wir aggregieren Deals aus einer Vielzahl von deutschen und europäischen Online-Shops:</p>
+    <div class="shops">
+      <span class="shop-tag">Amazon</span>
+      <span class="shop-tag">Coolblue</span>
+      <span class="shop-tag">Euronics</span>
+      <span class="shop-tag">Notebooksbilliger</span>
+      <span class="shop-tag">Expert</span>
+      <span class="shop-tag">Otto</span>
+      <span class="shop-tag">Galeria</span>
+      <span class="shop-tag">Tink</span>
+      <span class="shop-tag">Globus Baumarkt</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Unsere Zahlen</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Deals täglich</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Community-Mitglieder</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">9+</div>
+        <div class="stat-label">Partner-Shops</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Wie wir Deals kuratieren</h2>
+    <p>Unsere Deals werden automatisch aus offiziellen Produkt-Feeds und APIs der Partner-Shops aggregiert und täglich aktualisiert. Dabei filtern wir gezielt nach echten Rabatten gegenüber dem UVP. Zusätzlich werden ausgewählte Deals manuell geprüft und in unserer Discord-Community geteilt.</p>
+  </div>
+
+  <div class="section">
+    <h2>Die FlipUp Community</h2>
+    <p>Hinter FlipUp Deals steht eine aktive Discord-Community von Schnäppchenjägern und Online-Arbitrage-Enthusiasten. Mitglieder erhalten exklusive Deals, Frühwarnungen bei Preisfehlern und Zugang zu Tools rund um das Thema Online-Einkauf.</p>
+    <a href="https://discord.gg/flipup" class="discord-box" target="_blank" rel="noopener">
+      <span style="font-size:2rem;">💬</span>
+      <div>
+        <strong>FlipUp Discord Community</strong>
+        Jetzt beitreten und keine Deals mehr verpassen
+      </div>
+    </a>
+  </div>
+
+  <div class="section">
+    <h2>Affiliate-Hinweis</h2>
+    <p>Einige Links auf dieser Website sind Affiliate-Links. Wenn du über einen dieser Links einkaufst, erhalten wir eine kleine Provision – für dich entstehen dabei keine Mehrkosten. Diese Einnahmen helfen uns, den Service kostenlos anzubieten.</p>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
+  <div class="footer-links">
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="/agb.html">AGB</a>
+    <a href="/about.html">Über uns</a>
+  </div>
+</footer>
+
+</body>
+</html>
