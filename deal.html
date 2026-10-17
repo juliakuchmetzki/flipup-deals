@@ -123,6 +123,15 @@
     .back-link:hover { color: #111; }
 
     .loading { text-align: center; padding: 3rem; color: #999; font-size: 14px; }
+    footer {
+      border-top: 1px solid #e5e5e5; background: #fff;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+    }
+    footer p { font-size: 12px; color: #999; }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-size: 12px; color: #999; text-decoration: none; }
+    .footer-links a:hover { color: #111; }
   </style>
 </head>
 <body>
@@ -139,6 +148,16 @@
     <div class="loading">Deal wird geladen...</div>
   </div>
 </main>
+
+<footer>
+  <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
+  <div class="footer-links">
+    <a href="/about.html">Über uns</a>
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="/agb.html">AGB</a>
+  </div>
+</footer>
 
 <script>
   const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
