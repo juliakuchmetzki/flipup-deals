@@ -328,7 +328,7 @@
   <p>Willkommen bei FlipUp Deals – deiner ersten Anlaufstelle für die besten Deals aus Top-Shops wie Coolblue, Euronics und Notebooksbilliger. Täglich kuratiert von unserem Team.</p>
 </div>
 
-<div class="shop-logos" id="shops"></div>
+<div class="shop-logos" id="shops"><!--DEALS_SHOPS--></div>
 
 <div class="affiliate-bar">
   * Einige Links auf dieser Seite sind Affiliate-Links. Bei einem Kauf erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten.
@@ -336,10 +336,11 @@
 
 <main>
   <div class="meta-row">
-    <span class="deal-count" id="count">0 Deals</span>
+    <span class="deal-count" id="count"><!--DEALS_COUNT--></span>
     <span class="live"><span class="live-dot"></span>Live</span>
   </div>
-  <div class="grid" id="grid"></div>
+  <noscript><p style="color:#999;font-size:13px;margin-bottom:1rem">Für die Live-Aktualisierung der Deals wird JavaScript benötigt.</p></noscript>
+  <div class="grid" id="grid"><!--DEALS_GRID--></div>
 </main>
 
 <footer>
@@ -355,60 +356,79 @@
 <script>
   let all = [], current = 'all';
 
-  // Nur Shop-Deals mit Ziel-URL anzeigen
-  const isValidDeal = d => !!(d && d.shop && d.url);
+  const PLACEHOLDER = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
+
+  // Markup synchron halten: Die Funktionen escapeHtml, safeUrl, isValidDeal, byNewest,
+  // countText, shopsHtml und cardHtml existieren identisch in build.js (Vorrendern beim Build).
+  const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const safeUrl = v => { try { const u = new URL(v); return (u.protocol === 'https:' || u.protocol === 'http:') ? String(v) : ''; } catch { return ''; } };
+
+  // Nur Shop-Deals mit gültiger Ziel-URL und Preis anzeigen
+  const isValidDeal = d => !!(d && d.shop && safeUrl(d.url) && typeof d.price === 'number' && isFinite(d.price));
+  const byNewest = (a, b) => (Date.parse(b.foundAt) - Date.parse(a.foundAt)) || 0;
+
+  const countText = n => `${n} Deal${n !== 1 ? 's' : ''}`;
+
+  const shopsHtml = shops => shops.length
+    ? `<span>Deals von:</span>` + shops.map(s => `<span>🛒 ${escapeHtml(s)}</span>`).join('')
+    : '';
+
+  const cardHtml = d => {
+    const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
+    const ts = Date.parse(d.foundAt);
+    const date = isNaN(ts) ? '–' : new Date(ts).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    const image = safeUrl(d.image);
+    return `
+        <div class="card">
+          <img class="card-img" src="${image ? escapeHtml(image) : PLACEHOLDER}" alt="${escapeHtml(d.title)}" loading="lazy"
+            onerror="this.src='${PLACEHOLDER}'" />
+          <div class="card-body">
+            <div class="card-market">🛒 ${escapeHtml(d.shop)}${d.kategorie ? ` · ${escapeHtml(d.kategorie.charAt(0).toUpperCase() + d.kategorie.slice(1))}` : ''}</div>
+            <div class="card-title">${escapeHtml(d.title)}</div>
+            <div class="card-price-row">
+              <div>
+                <div class="card-price">€${escapeHtml(d.price.toFixed(2))}</div>
+                ${d.oldPrice ? `<div class="card-old">€${escapeHtml(Number(d.oldPrice).toFixed(2))}</div>` : ''}
+              </div>
+              ${pct ? `<div class="card-discount">-${pct}%</div>` : ''}
+            </div>
+            <div class="card-found">· Found at: ${escapeHtml(date)}</div>
+            <a class="card-btn" href="${escapeHtml(safeUrl(d.url))}" target="_blank" rel="nofollow sponsored">
+              Get Deal 🛒
+            </a>
+          </div>
+        </div>
+      `;
+  };
 
   async function load() {
     try {
       const r = await fetch('https://api.flipup-deals.de/api/deals.json');
-      if (r.ok) { all = (await r.json()).filter(isValidDeal); }
+      if (r.ok) { all = (await r.json()).filter(isValidDeal).sort(byNewest); }
       else throw 0;
-    } catch { all = []; }
+    } catch {
+      // Vorgerenderte (oder zuletzt geladene) Karten behalten, beim nächsten Intervall erneut versuchen
+      if (document.querySelector('#grid .card')) return;
+      all = [];
+    }
     renderShops();
     render();
   }
 
   function renderShops() {
-    const shops = [...new Set(all.map(d => d.shop))];
-    document.getElementById('shops').innerHTML = shops.length
-      ? `<span>Deals von:</span>` + shops.map(s => `<span>🛒 ${s}</span>`).join('')
-      : '';
+    document.getElementById('shops').innerHTML = shopsHtml([...new Set(all.map(d => d.shop))]);
   }
 
   function render() {
     const list = current === 'all' ? all : all.filter(d => d.kategorie === current);
-    document.getElementById('count').textContent = `${list.length} Deal${list.length !== 1 ? 's' : ''}`;
+    document.getElementById('count').textContent = countText(list.length);
 
     if (!list.length) {
       document.getElementById('grid').innerHTML = `<p style="color:#999;font-size:14px;grid-column:1/-1;padding:2rem 0">Keine Deals in dieser Kategorie.</p>`;
       return;
     }
 
-    document.getElementById('grid').innerHTML = list.map(d => {
-      const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
-      const date = new Date(d.foundAt).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-      return `
-        <div class="card">
-          <img class="card-img" src="${d.image}" alt="${d.title}" loading="lazy"
-            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>'" />
-          <div class="card-body">
-            <div class="card-market">🛒 ${d.shop}${d.kategorie ? ` · ${d.kategorie.charAt(0).toUpperCase() + d.kategorie.slice(1)}` : ''}</div>
-            <div class="card-title">${d.title}</div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price">€${d.price.toFixed(2)}</div>
-                ${d.oldPrice ? `<div class="card-old">€${d.oldPrice.toFixed(2)}</div>` : ''}
-              </div>
-              ${pct ? `<div class="card-discount">-${pct}%</div>` : ''}
-            </div>
-            <div class="card-found">· Found at: ${date}</div>
-            <a class="card-btn" href="${d.url}" target="_blank" rel="nofollow sponsored">
-              Get Deal 🛒
-            </a>
-          </div>
-        </div>
-      `;
-    }).join('');
+    document.getElementById('grid').innerHTML = list.map(cardHtml).join('');
   }
 
   function filterDeals(kat, btn) {
