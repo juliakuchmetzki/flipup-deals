@@ -17,13 +17,11 @@ const MAX_CARDS = 60;
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
-const STATIC_FILE = /\.(html|png|jpe?g|svg|webp|ico|xml|txt|woff2?)$/i;
-const STATIC_DIRS = ['fonts'];
+const STATIC_FILE = /\.(html|css|js|png|jpe?g|svg|webp|ico|xml|txt|woff2?)$/i;
+const STATIC_EXCLUDE = ['build.js'];
+const STATIC_DIRS = ['assets', 'fonts'];
 
-const PLACEHOLDER = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
-
-// Markup synchron halten: Die Funktionen escapeHtml, safeUrl, isValidDeal, byNewest,
-// eur, countText, CATEGORIES, navHtml, shopsHtml und cardHtml existieren identisch im <script> von index.html.
+// ---- SYNC-START: Dieser Block steht identisch in build.js und index.html (Markup synchron halten) ----
 const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl = v => { try { const u = new URL(v); return (u.protocol === 'https:' || u.protocol === 'http:') ? String(v) : ''; } catch { return ''; } };
 
@@ -33,48 +31,59 @@ const byNewest = (a, b) => (Date.parse(b.foundAt) - Date.parse(a.foundAt)) || 0;
 
 const eur = new Intl.NumberFormat('de-DE', {style:'currency', currency:'EUR'});
 
-const countText = n => `${n} Deal${n !== 1 ? 's' : ''}`;
+// Rabatt nur, wenn der alte Preis höher ist (und auf mind. 1 % gerundet)
+const discountPct = d => (typeof d.oldPrice === 'number' && d.oldPrice > d.price) ? Math.round((1 - d.price / d.oldPrice) * 100) : 0;
+
+const countText = n => n ? `${n} Deal${n !== 1 ? 's' : ''}` : '';
 
 // Nur Kategorien mit mindestens einem Deal anzeigen ("Alle" steht fest im HTML)
-const CATEGORIES = [['elektronik', '💻 Elektronik'], ['haushalt', '🏠 Haushalt'], ['sport', '🏃 Sport'], ['mode', '👗 Mode'], ['sonstiges', '📦 Sonstiges']];
+const CATEGORIES = [['elektronik', 'Elektronik'], ['haushalt', 'Haushalt'], ['sport', 'Sport'], ['mode', 'Mode'], ['sonstiges', 'Sonstiges']];
+const labelOf = k => (CATEGORIES.find(([key]) => key === k) || [k, String(k).charAt(0).toUpperCase() + String(k).slice(1)])[1];
+
 const navHtml = (deals, current = 'all') => CATEGORIES
   .filter(([key]) => deals.some(d => d.kategorie === key))
-  .map(([key, label]) => `<button class="nav-btn${key === current ? ' active' : ''}" data-kat="${key}" onclick="filterDeals('${key}')">${label}</button>`)
+  .map(([key, label]) => `<button class="chip" type="button" data-kat="${key}" aria-pressed="${key === current}">${label}</button>`)
   .join('');
 
 const shopsHtml = shops => shops.length
-  ? `<span>Deals von:</span>` + shops.map(s => `<span>🛒 ${escapeHtml(s)}</span>`).join('')
+  ? `<span class="shops-label">Deals von:</span>` + shops.map(s => `<span class="chip">${escapeHtml(s)}</span>`).join('')
   : '';
 
-const cardHtml = d => {
-  // Rabatt nur, wenn der alte Preis höher ist (und auf mind. 1 % gerundet)
-  const pct = (typeof d.oldPrice === 'number' && d.oldPrice > d.price) ? Math.round((1 - d.price/d.oldPrice) * 100) : 0;
-  const ts = Date.parse(d.foundAt);
-  // Im Browser gilt die lokale Zeitzone der Besucher:innen, beim Build Europe/Berlin.
-  const date = isNaN(ts) ? '–' : new Date(ts).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Berlin'});
+// Bild leer oder Platzhalter-Bild des Anbieters (noimage): Platzhalter-Kachel statt Fremdbild
+const mediaHtml = d => {
   const image = safeUrl(d.image);
+  return (!image || /noimage/i.test(image))
+    ? `<div class="card-media card-media-empty" role="img" aria-label="Kein Bild verfügbar"></div>`
+    : `<div class="card-media"><img src="${escapeHtml(image)}" alt="" width="400" height="300" loading="lazy" onerror="this.parentNode.classList.add('card-media-empty');this.remove()" /></div>`;
+};
+
+const dateText = ts => new Date(ts).toLocaleString('de-DE', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Berlin'});
+
+const cardHtml = d => {
+  const pct = discountPct(d);
+  const ts = Date.parse(d.foundAt);
+  const meta = [d.shop, d.kategorie && labelOf(d.kategorie)].filter(Boolean).map(escapeHtml).join(' · ');
   return `
-        <div class="card">
-          <img class="card-img" src="${image ? escapeHtml(image) : PLACEHOLDER}" alt="${escapeHtml(d.title)}" loading="lazy"
-            onerror="this.src='${PLACEHOLDER}'" />
+        <article class="card">
+          ${mediaHtml(d)}
           <div class="card-body">
-            <div class="card-market">🛒 ${escapeHtml(d.shop)}${d.kategorie ? ` · ${escapeHtml(d.kategorie.charAt(0).toUpperCase() + d.kategorie.slice(1))}` : ''}</div>
-            <div class="card-title">${escapeHtml(d.title)}</div>
+            <p class="card-meta">${meta}</p>
+            <h3 class="card-title" title="${escapeHtml(d.title)}">${escapeHtml(d.title)}</h3>
             <div class="card-price-row">
-              <div>
-                <div class="card-price">${escapeHtml(eur.format(d.price))}</div>
-                ${pct >= 1 ? `<div class="card-old">${escapeHtml(eur.format(d.oldPrice))}</div>` : ''}
-              </div>
-              ${pct >= 1 ? `<div class="card-discount">−${pct}&nbsp;%</div>` : ''}
+              <span class="card-price">${escapeHtml(eur.format(d.price))}</span>
+              ${pct >= 1 ? `<span class="card-old">${escapeHtml(eur.format(d.oldPrice))}</span><span class="badge">−${pct}&nbsp;%</span>` : ''}
             </div>
-            <div class="card-found">· Gefunden am: ${escapeHtml(date)}</div>
-            <a class="card-btn" href="${escapeHtml(safeUrl(d.url))}" target="_blank" rel="nofollow sponsored">
-              Zum Angebot 🛒
-            </a>
+            ${isNaN(ts) ? '' : `<time class="card-found" datetime="${escapeHtml(d.foundAt)}">Gefunden am ${escapeHtml(dateText(ts))}</time>`}
+            <a class="btn btn-block" href="${escapeHtml(safeUrl(d.url))}" target="_blank" rel="nofollow sponsored noopener">Zum Angebot</a>
           </div>
-        </div>
+        </article>
       `;
 };
+
+const emptyHtml = hasDeals => hasDeals
+  ? `<div class="empty-state"><strong>Keine Treffer</strong>Passe Suche oder Filter an.</div>`
+  : `<div class="empty-state"><strong>Gerade sind keine Deals online</strong>Schau bald wieder vorbei.</div>`;
+// ---- SYNC-ENDE ----
 
 async function fetchDeals() {
   const ctrl = new AbortController();
@@ -94,7 +103,7 @@ function copyStatic() {
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
   for (const entry of fs.readdirSync(ROOT, { withFileTypes: true })) {
-    if (entry.isFile() && STATIC_FILE.test(entry.name)) {
+    if (entry.isFile() && STATIC_FILE.test(entry.name) && !STATIC_EXCLUDE.includes(entry.name)) {
       fs.copyFileSync(path.join(ROOT, entry.name), path.join(DIST, entry.name));
     } else if (entry.isDirectory() && STATIC_DIRS.includes(entry.name)) {
       fs.cpSync(path.join(ROOT, entry.name), path.join(DIST, entry.name), { recursive: true });

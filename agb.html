@@ -4,57 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGB – FlipUp Deals</title>
+  <meta name="description" content="Allgemeine Geschäftsbedingungen von FlipUp Deals." />
+  <meta name="theme-color" content="#fbf7f5" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-180.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FlipUp Deals" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="AGB – FlipUp Deals" />
+  <meta property="og:description" content="Allgemeine Geschäftsbedingungen von FlipUp Deals." />
+  <meta property="og:url" content="https://flipup-deals.de/agb.html" />
+  <!-- TODO: eigenes Vorschaubild 1200x630 als og:image (bis dahin das Logo) -->
+  <meta property="og:image" content="https://flipup-deals.de/assets/favicon/favicon-512.png" />
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/fonts/inter.css" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #f5f5f5; color: #111; font-family: 'Inter', sans-serif; min-height: 100vh; }
-    header {
-      background: #fff; border-bottom: 1px solid #e5e5e5;
-      padding: 0 2rem; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo-box { background: #9d0208; color: #fff; font-weight: 700; font-size: 13px; padding: 4px 8px; border-radius: 5px; }
-    .logo-name { font-weight: 700; font-size: 16px; color: #111; }
-    .logo-name span { color: #9d0208; }
-    main { max-width: 760px; margin: 2rem auto; padding: 0 1.5rem 4rem; }
-    .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 2rem; }
-    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.3px; }
-    .updated { font-size: 12px; color: #999; margin-bottom: 1.5rem; }
-    .toc { background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
-    .toc p { font-size: 13px; font-weight: 600; margin-bottom: 0.5rem; color: #111; }
-    .toc ol { padding-left: 1.25rem; }
-    .toc li { font-size: 13px; color: #555; line-height: 1.8; }
-    .toc a { color: #9d0208; text-decoration: none; }
-    .toc a:hover { text-decoration: underline; }
-    h2 { font-size: 1rem; font-weight: 600; margin: 1.75rem 0 0.5rem; color: #111; }
-    p { font-size: 14px; line-height: 1.7; color: #444; margin-bottom: 0.5rem; }
-    a { color: #9d0208; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #f0f0f0; }
-    footer {
-      border-top: 1px solid #e5e5e5; background: #fff;
-      padding: 1.25rem 2rem;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
-    }
-    footer p { font-size: 12px; color: #999; }
-    .footer-links { display: flex; gap: 1.25rem; }
-    .footer-links a { font-size: 12px; color: #999; text-decoration: none; }
-    .footer-links a:hover { color: #111; }
-  </style>
+  <link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<header>
-  <a href="/" class="logo">
-    <img src="/flipuplogo.webp" alt="FlipUp" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" />
-    <div class="logo-name">FlipUp <span>Deals</span></div>
-  </a>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+
+<header class="site-header" id="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="/"><img class="brand-logo" src="/flipuplogo.webp" width="36" height="36" alt="" /><span>FlipUp <b>Deals</b></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menü öffnen"><span class="nav-toggle-bars"></span></button>
+    <nav class="nav-menu" id="nav-menu" aria-label="Hauptnavigation">
+      <a href="/#deals">Deals</a>
+      <a href="/about.html">Über uns</a>
+      <a href="https://flipupde.de" target="_blank" rel="noopener">FlipUp ↗</a>
+    </nav>
+  </div>
 </header>
 
-<main>
-  <div class="card">
+<main id="main" class="legal">
+  <div class="legal-prose">
     <!-- RECHTSTEXT-START -->
     <h1>Allgemeine Geschäftsbedingungen mit Kundeninformationen</h1>
     <div class="toc">
@@ -94,15 +80,43 @@
   </div>
 </main>
 
-<footer>
-  <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
-  <div class="footer-links">
-    <a href="/about.html">Über uns</a>
-    <a href="/impressum.html">Impressum</a>
-    <a href="/datenschutz.html">Datenschutz</a>
-    <a href="/agb.html">AGB</a>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="footer-brand">FlipUp Deals</p>
+      <p class="footer-tagline">Aktuelle Deals aus Online-Shops an einem Ort, täglich aktualisiert. Die Links zu den Deals sind Affiliate-Links (Werbung).</p>
+    </div>
+    <nav aria-label="Info und Rechtliches">
+      <p class="footer-heading">Info &amp; Rechtliches</p>
+      <ul class="footer-links">
+        <li><a href="/about.html">Über uns</a></li>
+        <li><a href="/impressum.html">Impressum</a></li>
+        <li><a href="/datenschutz.html">Datenschutz</a></li>
+        <li><a href="/agb.html">AGB</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Projekte">
+      <p class="footer-heading">Projekte</p>
+      <ul class="footer-links">
+        <li><a href="https://flipupde.de" target="_blank" rel="noopener">FlipUp ↗</a></li>
+        <li><a href="https://johanneskuchmetzki.de" target="_blank" rel="noopener">Johannes Kuchmetzki ↗</a></li>
+        <li><a href="https://flipbase.xyz" target="_blank" rel="noopener">FlipBase ↗</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-heading">Kontakt</p>
+      <ul class="footer-links">
+        <li><a href="mailto:johanneskuchmetzki@gmail.com">johanneskuchmetzki@gmail.com</a></li>
+        <li><a href="https://discord.gg/427Qmsvkgf" target="_blank" rel="noopener">Discord-Community ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 FlipUp Deals</span>
+    <span>Werbung: Die Links zu den Deals sind Affiliate-Links.</span>
   </div>
 </footer>
 
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

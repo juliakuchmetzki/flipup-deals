@@ -5,164 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, follow" />
   <title>FlipUp Deals – Deal ansehen</title>
+  <meta name="description" content="Deal-Detailansicht von FlipUp Deals." />
+  <meta name="theme-color" content="#fbf7f5" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-180.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FlipUp Deals" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="FlipUp Deals – Deal ansehen" />
+  <meta property="og:description" content="Deal-Detailansicht von FlipUp Deals." />
+  <meta property="og:url" content="https://flipup-deals.de/deal.html" />
+  <!-- TODO: eigenes Vorschaubild 1200x630 als og:image (bis dahin das Logo) -->
+  <meta property="og:image" content="https://flipup-deals.de/assets/favicon/favicon-512.png" />
   <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/fonts/inter.css" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #f5f5f5; color: #111; font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-    header {
-      background: #fff; border-bottom: 1px solid #e5e5e5;
-      padding: 0 2rem; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .logo img { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; }
-    .logo-name { font-weight: 700; font-size: 16px; color: #111; }
-    .logo-name span { color: #9d0208; }
-
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid #e5e5e5;
-      border-radius: 12px;
-      padding: 2rem;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-    }
-
-    .product-img {
-      width: 100%;
-      max-height: 220px;
-      object-fit: contain;
-      margin-bottom: 1.25rem;
-      border-radius: 8px;
-      background: #f9f9f9;
-      padding: 1rem;
-    }
-
-    .product-title {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      color: #111;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .price {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #111;
-    }
-
-    .old-price {
-      font-size: 14px;
-      color: #aaa;
-      text-decoration: line-through;
-    }
-
-    .discount {
-      font-size: 12px;
-      font-weight: 600;
-      background: #fef2f2;
-      color: #9d0208;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    .btn-alza {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      background: #0055a5;
-      color: #fff;
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: background 0.12s;
-      margin-bottom: 0.75rem;
-    }
-    .btn-alza:hover { background: #00408a; }
-
-    .disclosure {
-      font-size: 11px;
-      color: #999;
-      text-align: center;
-      line-height: 1.6;
-      border-top: 1px solid #f0f0f0;
-      padding-top: 1rem;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 12px;
-      color: #999;
-      text-decoration: none;
-      margin-bottom: 1rem;
-    }
-    .back-link:hover { color: #111; }
-
-    .loading { text-align: center; padding: 3rem; color: #999; font-size: 14px; }
-    footer {
-      border-top: 1px solid #e5e5e5; background: #fff;
-      padding: 1.25rem 2rem;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
-    }
-    footer p { font-size: 12px; color: #999; }
-    .footer-links { display: flex; gap: 1.25rem; }
-    .footer-links a { font-size: 12px; color: #999; text-decoration: none; }
-    .footer-links a:hover { color: #111; }
-  </style>
+  <link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<header>
-  <a href="/" class="logo">
-    <img src="/flipuplogo.webp" alt="FlipUp" />
-    <div class="logo-name">FlipUp <span>Deals</span></div>
-  </a>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+
+<header class="site-header" id="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="/"><img class="brand-logo" src="/flipuplogo.webp" width="36" height="36" alt="" /><span>FlipUp <b>Deals</b></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menü öffnen"><span class="nav-toggle-bars"></span></button>
+    <nav class="nav-menu" id="nav-menu" aria-label="Hauptnavigation">
+      <a href="/#deals">Deals</a>
+      <a href="/about.html">Über uns</a>
+      <a href="https://flipupde.de" target="_blank" rel="noopener">FlipUp ↗</a>
+    </nav>
+  </div>
 </header>
 
-<main>
-  <div class="card" id="card">
-    <div class="loading">Deal wird geladen...</div>
+<main id="main" class="detail">
+  <div class="container">
+    <a href="/" class="back-link">← Zurück zu allen Deals</a>
+    <div id="card" aria-live="polite">
+      <div class="loading">Deal wird geladen …</div>
+    </div>
+    <noscript><p class="noscript-note">Für diese Seite wird JavaScript benötigt. <a href="/">Zurück zu allen Deals</a></p></noscript>
   </div>
 </main>
 
-<footer>
-  <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
-  <div class="footer-links">
-    <a href="/about.html">Über uns</a>
-    <a href="/impressum.html">Impressum</a>
-    <a href="/datenschutz.html">Datenschutz</a>
-    <a href="/agb.html">AGB</a>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="footer-brand">FlipUp Deals</p>
+      <p class="footer-tagline">Aktuelle Deals aus Online-Shops an einem Ort, täglich aktualisiert. Die Links zu den Deals sind Affiliate-Links (Werbung).</p>
+    </div>
+    <nav aria-label="Info und Rechtliches">
+      <p class="footer-heading">Info &amp; Rechtliches</p>
+      <ul class="footer-links">
+        <li><a href="/about.html">Über uns</a></li>
+        <li><a href="/impressum.html">Impressum</a></li>
+        <li><a href="/datenschutz.html">Datenschutz</a></li>
+        <li><a href="/agb.html">AGB</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Projekte">
+      <p class="footer-heading">Projekte</p>
+      <ul class="footer-links">
+        <li><a href="https://flipupde.de" target="_blank" rel="noopener">FlipUp ↗</a></li>
+        <li><a href="https://johanneskuchmetzki.de" target="_blank" rel="noopener">Johannes Kuchmetzki ↗</a></li>
+        <li><a href="https://flipbase.xyz" target="_blank" rel="noopener">FlipBase ↗</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-heading">Kontakt</p>
+      <ul class="footer-links">
+        <li><a href="mailto:johanneskuchmetzki@gmail.com">johanneskuchmetzki@gmail.com</a></li>
+        <li><a href="https://discord.gg/427Qmsvkgf" target="_blank" rel="noopener">Discord-Community ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 FlipUp Deals</span>
+    <span>Werbung: Die Links zu den Deals sind Affiliate-Links.</span>
   </div>
 </footer>
 
 <script>
   const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const eur = new Intl.NumberFormat('de-DE', {style:'currency', currency:'EUR'});
   const safeUrl = v => { try { const u = new URL(v); return (u.protocol === 'https:' || u.protocol === 'http:') ? String(v) : ''; } catch { return ''; } };
+  const eur = new Intl.NumberFormat('de-DE', {style:'currency', currency:'EUR'});
 
   async function loadDeal() {
     const params = new URLSearchParams(window.location.search);
@@ -197,7 +125,8 @@
     const pct      = (typeof deal.oldPrice === 'number' && typeof deal.price === 'number' && deal.oldPrice > deal.price) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : 0;
     const price    = deal.price ? eur.format(deal.price) : null;
     const oldPrice = pct >= 1 ? eur.format(deal.oldPrice) : null;
-    const image    = safeUrl(deal.image) || 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
+    const image    = safeUrl(deal.image);
+    const noImage  = !image || /noimage/i.test(image);
     const alzaLink = deal.alza_link;
 
     document.title = `${title.substring(0, 60)} – FlipUp Deals`;
@@ -205,30 +134,32 @@
     const disclosureAlza = ' Für Alza-Links gilt eine Affiliate-Partnerschaft.';
 
     document.getElementById('card').innerHTML = `
-      <a href="/" class="back-link">← Zurück zu allen Deals</a>
-      <img class="product-img" src="${escapeHtml(image)}" alt="${escapeHtml(title)}"
-        onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>'" />
-      <div class="product-title">${escapeHtml(title)}</div>
-      ${price ? `
-      <div class="price-row">
-        <div class="price">${escapeHtml(price)}</div>
-        ${oldPrice ? `<div class="old-price">${escapeHtml(oldPrice)}</div>` : ''}
-        ${pct >= 1 ? `<div class="discount">−${pct}&nbsp;%</div>` : ''}
-      </div>` : ''}
-
-      <a class="btn-alza" href="${escapeHtml(alzaLink)}" target="_blank" rel="nofollow sponsored">
-        🔵 Bei Alza ansehen →
-      </a>
-
-      <div class="disclosure">
-        * Werbung: Bei einem Kauf über Affiliate-Links erhalten wir eine Provision.${disclosureAlza}
-        Für dich entstehen keine Mehrkosten.
-      </div>
+      <article class="detail-card">
+        ${noImage
+          ? `<div class="detail-media card-media-empty" role="img" aria-label="Kein Bild verfügbar"></div>`
+          : `<div class="detail-media"><img src="${escapeHtml(image)}" alt="" width="400" height="300" onerror="this.parentNode.classList.add('card-media-empty');this.remove()" /></div>`}
+        <div class="detail-info">
+          <p class="detail-meta">${escapeHtml(deal.shop || 'Alza')}</p>
+          <h1 class="detail-title">${escapeHtml(title)}</h1>
+          ${price ? `
+          <div class="detail-price-row">
+            <span class="detail-price">${escapeHtml(price)}</span>
+            ${oldPrice ? `<span class="card-old">${escapeHtml(oldPrice)}</span>` : ''}
+            ${pct >= 1 ? `<span class="badge">−${pct}&nbsp;%</span>` : ''}
+          </div>` : ''}
+          <a class="btn btn-block" href="${escapeHtml(alzaLink)}" target="_blank" rel="nofollow sponsored noopener">Zum Angebot bei Alza</a>
+          <p class="disclosure">
+            * Werbung: Bei einem Kauf über Affiliate-Links erhalten wir eine Provision.${disclosureAlza}
+            Für dich entstehen keine Mehrkosten. Preis und Verfügbarkeit bitte beim Shop prüfen.
+          </p>
+        </div>
+      </article>
     `;
   }
 
   loadDeal();
 </script>
 
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
