@@ -142,6 +142,7 @@
 
 <script>
   const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const eur = new Intl.NumberFormat('de-DE', {style:'currency', currency:'EUR'});
   const safeUrl = v => { try { const u = new URL(v); return (u.protocol === 'https:' || u.protocol === 'http:') ? String(v) : ''; } catch { return ''; } };
 
   async function loadDeal() {
@@ -173,8 +174,8 @@
     }
 
     const title    = deal.title || 'Angebot ansehen';
-    const price    = deal.price    ? `€${Number(deal.price).toFixed(2)}`    : null;
-    const oldPrice = deal.oldPrice ? `€${Number(deal.oldPrice).toFixed(2)}` : null;
+    const price    = deal.price    ? eur.format(deal.price)    : null;
+    const oldPrice = deal.oldPrice ? eur.format(deal.oldPrice) : null;
     const pct      = (deal.price && deal.oldPrice) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : null;
     const image    = safeUrl(deal.image) || 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
     const alzaLink = deal.alza_link;

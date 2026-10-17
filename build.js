@@ -23,13 +23,15 @@ const STATIC_DIRS = ['fonts'];
 const PLACEHOLDER = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
 
 // Markup synchron halten: Die Funktionen escapeHtml, safeUrl, isValidDeal, byNewest,
-// countText, shopsHtml und cardHtml existieren identisch im <script> von index.html.
+// eur, countText, shopsHtml und cardHtml existieren identisch im <script> von index.html.
 const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl = v => { try { const u = new URL(v); return (u.protocol === 'https:' || u.protocol === 'http:') ? String(v) : ''; } catch { return ''; } };
 
 // Nur Shop-Deals mit gültiger Ziel-URL und Preis anzeigen
 const isValidDeal = d => !!(d && d.shop && safeUrl(d.url) && typeof d.price === 'number' && isFinite(d.price));
 const byNewest = (a, b) => (Date.parse(b.foundAt) - Date.parse(a.foundAt)) || 0;
+
+const eur = new Intl.NumberFormat('de-DE', {style:'currency', currency:'EUR'});
 
 const countText = n => `${n} Deal${n !== 1 ? 's' : ''}`;
 
@@ -52,8 +54,8 @@ const cardHtml = d => {
             <div class="card-title">${escapeHtml(d.title)}</div>
             <div class="card-price-row">
               <div>
-                <div class="card-price">€${escapeHtml(d.price.toFixed(2))}</div>
-                ${d.oldPrice ? `<div class="card-old">€${escapeHtml(Number(d.oldPrice).toFixed(2))}</div>` : ''}
+                <div class="card-price">${escapeHtml(eur.format(d.price))}</div>
+                ${d.oldPrice ? `<div class="card-old">${escapeHtml(eur.format(d.oldPrice))}</div>` : ''}
               </div>
               ${pct ? `<div class="card-discount">-${pct}%</div>` : ''}
             </div>
