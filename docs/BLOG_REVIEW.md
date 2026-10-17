@@ -7,7 +7,7 @@ die Rechtsthemen. Die Artikel enthalten keine `TODO verify`-Marker; offene Punkt
 ## Allgemein zu klären
 
 - [ ] **Autor und Impressum:** Alle Artikel nennen „Johannes Kuchmetzki“ als Autor (wie im Impressum).
-- [ ] **Wikipedia als Quelle** im Artikel Black Friday: dient nur für die Definition der Termine (Freitag nach dem vierten Donnerstag im November usw.). Wenn du keine Wikipedia-Links willst, bitte entfernen; die Termine sind rechnerisch nachvollziehbar.
+- [x] **Erledigt:** Die Online-Enzyklopädie-Einträge, die im Artikel Black Friday nur für die Definition der Termine dienten, sind aus den Quellen entfernt. Die Termine sind rechnerisch nachvollziehbar (Freitag nach dem vierten Donnerstag im November usw.).
 - [ ] **Aussagen ohne Einzelquelle** (allgemeines Fachwissen, bewusst als Faustregel oder „in der Regel“ formuliert): Panel-Technik (OLED, QLED, Mini-LED, IPS, VA), RAM-/SSD-Faustregeln, Akku-Angaben unter Idealbedingungen, Tracking-Ablauf bei Cashback, Wartezeiten und Mindestauszahlung bei Cashback.
 - [ ] **Keine Händler-, Produkt- oder Preisangaben:** Die Artikel nennen weder Shops noch Modelle noch Preise; Rechenbeispiele sind als „fiktiv“ gekennzeichnet.
 - [ ] **Datum:** Alle Artikel tragen 2026-10-17. Rechtsstand bei Veröffentlichung später prüfen (Recht auf Reparatur seit 31.07.2026 ist neu).
@@ -25,7 +25,7 @@ die Rechtsthemen. Die Artikel enthalten keine `TODO verify`-Marker; offene Punkt
 - [ ] Termine 2026: Singles Day 11.11. (Mittwoch), Thanksgiving 26.11., Black Friday 27.11. (Freitag), Cyber Monday 30.11. (Montag). Wochentage nachgerechnet (Kalender 2026).
 - [ ] § 312g Abs. 2 BGB Ausnahmen vom Widerruf; § 356 Abs. 2 Nr. 1 a BGB Fristbeginn (Erhalt der Ware).
 - [ ] Zitierte Aussagen der Verbraucherzentrale: Preisvergleich in zwei Preissuchmaschinen, Zeitdruck/Bestandsbalken, Zahlung per Rechnung/Lastschrift statt Vorkasse, „gute Angebote kommen immer wieder“.
-- Quellen: verbraucherzentrale.de (Tipps Schnäppchenjagd, Stand 28.10.2025; Fakeshop-Finder), gesetze-im-internet.de/bgb/__312g.html, __356.html, de.wikipedia.org (Black_Friday, Cyber_Monday, Singles’_Day).
+- Quellen: verbraucherzentrale.de (Tipps Schnäppchenjagd, Stand 28.10.2025; Fakeshop-Finder), gesetze-im-internet.de/bgb/__312g.html, __356.html.
 
 ## 3. Wie funktioniert Cashback? (`wie-funktioniert-cashback`)
 
@@ -70,7 +70,7 @@ die Rechtsthemen. Die Artikel enthalten keine `TODO verify`-Marker; offene Punkt
 ## 8. Was ist ein Affiliate-Link? (`was-ist-ein-affiliate-link`)
 
 - [ ] Beschreibung der Funktionsweise von FlipUp Deals stimmt mit `about.html` überein („Unsere Deals werden automatisch erfasst und regelmäßig aktualisiert. Ausgewählte Deals prüfen wir zusätzlich manuell.“) und mit der Startseite (Sortierung „Neueste zuerst“, Filter, Suche, Rabatt nur bei höherem Altpreis).
-- [ ] Satz „Die Produktauswahl erfolgt unabhängig und wird durch eventuelle Provisionen nicht beeinflusst.“ steht wörtlich im Impressum (Zusatzinfos). **Bitte bestätigen, dass das den Tatsachen entspricht.**
+- [ ] Aussage zur Auswahl der Deals: „Wir zeigen nur Angebote von Shops, mit denen wir über Partnernetzwerke zusammenarbeiten. Standardmäßig sortieren wir nach Datum, die Höhe einer möglichen Provision spielt dafür keine Rolle.“ steht wörtlich im Impressum (Zusatzinfos) und im Affiliate-Artikel (Text und FAQ). **Bitte bestätigen, dass das den Tatsachen entspricht** (insbesondere: Standardsortierung nach Datum, Provisionshöhe ohne Einfluss).
 - [ ] § 5a Abs. 4 UWG (kommerzieller Zweck kenntlich machen) und § 6 Abs. 1 Nr. 1 DDG (kommerzielle Kommunikation klar erkennbar): sinngemäß wiedergegeben.
 - [ ] Tracking-Hinweis verweist auf die Datenschutzerklärung (Awin-Abschnitt, Cookies „grundsätzlich auf den Partnerseiten“).
 - Quellen: gesetze-im-internet.de/uwg_2004/__5a.html, gesetze-im-internet.de/ddg/__6.html.

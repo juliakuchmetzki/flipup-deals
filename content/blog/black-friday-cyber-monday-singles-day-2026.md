@@ -29,6 +29,8 @@ So kommen die Termine zustande:
 
 > **Hinweis:** Wann eine Aktion in einem Shop tatsächlich beginnt und endet, legt der jeweilige Händler selbst fest. Verlass dich deshalb auf die Angaben im Shop, nicht auf den Kalender.
 
+Manche Händler starten ihre Aktionen schon vor dem Black Friday oder verlängern sie über den Cyber Monday hinaus. Ob ein Preis wirklich niedrig ist, zeigt dir deshalb nicht der Aktionstag, sondern der Preisverlauf.
+
 ## So bereitest du dich vor
 
 **1. Wunschliste schreiben.** Notiere dir nur die Dinge, die du ohnehin kaufen wolltest, und lege für jedes Produkt eine Obergrenze fest. Wer ohne Plan in Aktionen stöbert, kauft leichter Dinge, die er nicht braucht.
