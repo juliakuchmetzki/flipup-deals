@@ -729,6 +729,7 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
 /* ---------- Deal-Detailseite ---------- */
 
 .detail { padding: 24px 0 56px; }
+.detail > .container { max-width: 980px; }
 .back-link {
   display: inline-flex;
   align-items: center;
