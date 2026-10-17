@@ -45,7 +45,7 @@
     var(--bg-alt);
 }
 
-.cover-badge { align-self: flex-start; margin: 0; }
+.cover-badge { align-self: flex-start; margin: 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; line-height: 1.25; }
 
 .cover-title {
   display: block;
@@ -128,8 +128,12 @@
 .lead-side { display: grid; grid-template-columns: 1fr; gap: 20px; }
 
 @media (min-width: 768px) {
-  .lead-grid { grid-template-columns: 1.45fr 1fr; gap: 24px; }
-  .lead-side { grid-template-rows: 1fr 1fr; gap: 24px; }
+  .lead-grid { gap: 24px; }
+  .lead-side { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+@media (min-width: 1024px) {
+  .lead-grid { grid-template-columns: 1.45fr 1fr; }
+  .lead-side { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
 }
 
 /* Karte */
@@ -191,6 +195,7 @@
   .post-card--compact .post-card-body { justify-content: center; padding: 14px 18px; }
   .post-card--compact .post-card-title { font-size: 1.02rem; -webkit-line-clamp: 3; }
   .post-card--compact .post-card-desc { -webkit-line-clamp: 2; font-size: 0.86rem; }
+  .post-card--compact .cover-badge { font-size: 0.6rem; letter-spacing: 0.01em; padding: 3px 7px; }
 }
 
 /* Liste: Steuerung und Raster */
