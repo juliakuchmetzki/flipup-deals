@@ -46,7 +46,7 @@ const navHtml = (deals, current = 'all') => CATEGORIES
   .join('');
 
 const shopsHtml = shops => shops.length
-  ? `<span class="shops-label">Deals von:</span>` + shops.map(s => `<span class="chip">${escapeHtml(s)}</span>`).join('')
+  ? `Aktuell von: ${shops.map(escapeHtml).join(' · ')}`
   : '';
 
 // Bild leer oder Platzhalter-Bild des Anbieters (noimage): Platzhalter-Kachel statt Fremdbild

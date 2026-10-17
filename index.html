@@ -45,12 +45,8 @@
   <section class="hero">
     <div class="container">
       <h1>Die besten <span class="accent-script">Deals</span> aus Online-Shops</h1>
-      <p class="hero-sub">Täglich aktualisiert – Angebote aus Top-Shops übersichtlich an einem Ort.</p>
-      <ul class="trust">
-        <li><strong>Automatisch aktualisiert</strong>Die Liste wird regelmäßig automatisch aktualisiert.</li>
-        <li><strong>Preis beim Shop prüfen</strong>Maßgeblich sind Preis und Verfügbarkeit im jeweiligen Shop.</li>
-        <li><strong>Werbung</strong>Die Links zu den Deals sind Affiliate-Links.</li>
-      </ul>
+      <p class="hero-sub">Täglich aktualisiert – Angebote aus Top-Shops an einem Ort.</p>
+      <p class="shops" id="shops"><!--DEALS_SHOPS--></p>
     </div>
   </section>
 
@@ -60,8 +56,6 @@
     <div class="notice" role="note">
       Einige Links auf dieser Seite sind Affiliate-Links. Bei einem Kauf erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten.
     </div>
-
-    <div class="shops" id="shops"><!--DEALS_SHOPS--></div>
 
     <!-- Filter, Suche und Sortierung brauchen JavaScript (ohne JS bleibt die vorgerenderte Liste) -->
     <div class="controls" id="controls">
@@ -81,10 +75,11 @@
       </div>
     </div>
 
-    <p class="deal-count" id="count" aria-live="polite"><!--DEALS_COUNT--></p>
-
     <noscript><p class="noscript-note">Für die Live-Aktualisierung der Deals wird JavaScript benötigt.</p></noscript>
-    <p class="ad-note">Werbung: Die Links zu den Deals sind Affiliate-Links.</p>
+    <div class="results-row">
+      <p class="deal-count" id="count" aria-live="polite"><!--DEALS_COUNT--></p>
+      <p class="ad-note">Werbung: Die Links zu den Deals sind Affiliate-Links.</p>
+    </div>
     <div class="deal-grid" id="grid"><!--DEALS_GRID--></div>
   </section>
 
@@ -145,7 +140,7 @@ const navHtml = (deals, current = 'all') => CATEGORIES
   .join('');
 
 const shopsHtml = shops => shops.length
-  ? `<span class="shops-label">Deals von:</span>` + shops.map(s => `<span class="chip">${escapeHtml(s)}</span>`).join('')
+  ? `Aktuell von: ${shops.map(escapeHtml).join(' · ')}`
   : '';
 
 // Bild leer oder Platzhalter-Bild des Anbieters (noimage): Platzhalter-Kachel statt Fremdbild
