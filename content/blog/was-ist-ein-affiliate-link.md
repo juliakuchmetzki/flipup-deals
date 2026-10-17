@@ -35,7 +35,7 @@ Technisch läuft das in der Regel über ein Partnernetzwerk. Es bündelt die Lin
 
 > **Hinweis:** FlipUp Deals ist kein Cashback-Dienst. Wir zahlen dir nichts zurück und geben keinen Anteil unserer Provision weiter.
 
-## Wie Deals entstehen und wie unabhängig die Auswahl ist
+## Wie Deals entstehen und welche Shops wir zeigen
 
 ### Wie Deals bei FlipUp Deals entstehen
 
@@ -52,9 +52,9 @@ So läuft ein Kauf über FlipUp Deals ab:
 3. Du entscheidest dort, ob du kaufst. Den Vertrag schließt du ausschließlich mit dem Shop.
 4. Kommt ein Kauf zustande, kann der Shop über das Partnernetzwerk eine Provision zahlen. Dir gegenüber ändert sich nichts.
 
-### Wie unabhängig ist die Auswahl?
+### Welche Shops wir zeigen
 
-Die Produktauswahl erfolgt unabhängig und wird durch eventuelle Provisionen nicht beeinflusst. Das ist unser Anspruch, den wir auch im Impressum beschreiben. Hinweise zu Werbung und Affiliate-Links findest du außerdem auf der Seite [Über uns](/about.html). Mehr als diese Beschreibung können wir nicht belegen: Wir erfassen Deals, aktualisieren sie und kennzeichnen sie als Werbung.
+Wir zeigen nur Angebote von Shops, mit denen wir über Partnernetzwerke zusammenarbeiten. Standardmäßig sortieren wir nach Datum, die Höhe einer möglichen Provision spielt dafür keine Rolle. Das heißt auch: Du siehst bei uns nicht den ganzen Markt, sondern nur Shops aus unseren Partnernetzwerken. Hinweise zu Werbung und Affiliate-Links findest du außerdem auf der Seite [Über uns](/about.html). Mehr als diese Beschreibung können wir nicht belegen: Wir erfassen Deals, aktualisieren sie und kennzeichnen sie als Werbung.
 
 ## Warum die Kennzeichnung als Werbung wichtig ist
 
@@ -80,8 +80,6 @@ Das gilt nicht nur für uns, sondern für jede Seite, die Produkte empfiehlt ode
 - **Rückgabe kennen:** Informiere dich über Widerruf und Gewährleistung, bevor du kaufst.
 - **Datenschutz im Blick behalten:** Auf den Seiten der Shops gelten deren Datenschutzhinweise und Einwilligungsabfragen.
 
-*Dieser Artikel erklärt unser Vorgehen und ersetzt keine Rechtsberatung.*
-
 ## Häufig gestellte Fragen
 
 ### Zahle ich mehr, wenn ich über einen Affiliate-Link kaufe?
@@ -92,9 +90,9 @@ Nein, für dich entstehen keine Mehrkosten. Der Preis wird vom Shop festgelegt. 
 
 Die Links zu den Deals sind Affiliate-Links. Das steht an mehreren Stellen auf der Seite, zum Beispiel direkt über der Liste der Deals und im Footer: „Werbung: Die Links zu den Deals sind Affiliate-Links.“
 
-### Beeinflusst die Provision, welche Deals ihr zeigt?
+### Welche Shops zeigt ihr, und spielt die Provision eine Rolle?
 
-Die Produktauswahl erfolgt unabhängig und wird durch eventuelle Provisionen nicht beeinflusst. Die Deals werden automatisch erfasst und regelmäßig aktualisiert, ausgewählte Deals prüfen wir zusätzlich manuell.
+Wir zeigen nur Angebote von Shops, mit denen wir über Partnernetzwerke zusammenarbeiten. Standardmäßig sortieren wir nach Datum, die Höhe einer möglichen Provision spielt dafür keine Rolle. Die Deals werden automatisch erfasst und regelmäßig aktualisiert, ausgewählte Deals prüfen wir zusätzlich manuell.
 
 ### Verkauft FlipUp Deals selbst etwas?
 

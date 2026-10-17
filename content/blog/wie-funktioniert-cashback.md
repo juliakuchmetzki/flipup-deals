@@ -97,7 +97,7 @@ Häufige Gründe sind Tracking-Schutz oder Werbeblocker, ein anderer Ablauf als 
 
 ### Ist das Tracking erlaubt?
 
-Das Speichern von Informationen auf deinem Gerät ist nach § 25 TDDDG grundsätzlich einwilligungsbedürftig, es sei denn, es ist unbedingt erforderlich, um einen von dir ausdrücklich gewünschten Dienst bereitzustellen. Ob das im Einzelfall erfüllt ist, hängt vom Anbieter ab. Dieser Artikel ersetzt keine Rechtsberatung.
+Das Speichern von Informationen auf deinem Gerät ist nach § 25 TDDDG grundsätzlich einwilligungsbedürftig, es sei denn, es ist unbedingt erforderlich, um einen von dir ausdrücklich gewünschten Dienst bereitzustellen. Ob das im Einzelfall erfüllt ist, hängt vom Anbieter ab.
 
 ## Quellen
 

@@ -120,6 +120,3 @@ Prüfe den Shop, bevor du kaufst: Impressum, Zahlungsarten, Bewertungen auf unab
 - [Verbraucherzentrale: Fakeshop-Finder](https://www.verbraucherzentrale.de/fakeshopfinder-71560)
 - [§ 312g BGB – Widerrufsrecht (gesetze-im-internet.de)](https://www.gesetze-im-internet.de/bgb/__312g.html)
 - [§ 356 BGB – Widerrufsrecht bei Fernabsatzverträgen (gesetze-im-internet.de)](https://www.gesetze-im-internet.de/bgb/__356.html)
-- [Wikipedia: Black Friday](https://de.wikipedia.org/wiki/Black_Friday) (Definition: Freitag nach Thanksgiving, vierter Donnerstag im November)
-- [Wikipedia: Cyber Monday](https://de.wikipedia.org/wiki/Cyber_Monday) (Montag nach Thanksgiving-Wochenende)
-- [Wikipedia: Singles’ Day](https://de.wikipedia.org/wiki/Singles%E2%80%99_Day) (11. November)
