@@ -174,9 +174,10 @@
     }
 
     const title    = deal.title || 'Angebot ansehen';
-    const price    = deal.price    ? eur.format(deal.price)    : null;
-    const oldPrice = deal.oldPrice ? eur.format(deal.oldPrice) : null;
-    const pct      = (deal.price && deal.oldPrice) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : null;
+    // Rabatt nur, wenn der alte Preis höher ist (und auf mind. 1 % gerundet)
+    const pct      = (typeof deal.oldPrice === 'number' && typeof deal.price === 'number' && deal.oldPrice > deal.price) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : 0;
+    const price    = deal.price ? eur.format(deal.price) : null;
+    const oldPrice = pct >= 1 ? eur.format(deal.oldPrice) : null;
     const image    = safeUrl(deal.image) || 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
     const alzaLink = deal.alza_link;
 
@@ -193,7 +194,7 @@
       <div class="price-row">
         <div class="price">${escapeHtml(price)}</div>
         ${oldPrice ? `<div class="old-price">${escapeHtml(oldPrice)}</div>` : ''}
-        ${pct ? `<div class="discount">-${pct}%</div>` : ''}
+        ${pct >= 1 ? `<div class="discount">−${pct}&nbsp;%</div>` : ''}
       </div>` : ''}
 
       <a class="btn-alza" href="${escapeHtml(alzaLink)}" target="_blank" rel="nofollow sponsored">

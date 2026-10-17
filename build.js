@@ -40,7 +40,8 @@ const shopsHtml = shops => shops.length
   : '';
 
 const cardHtml = d => {
-  const pct = d.oldPrice ? Math.round((1 - d.price/d.oldPrice) * 100) : null;
+  // Rabatt nur, wenn der alte Preis höher ist (und auf mind. 1 % gerundet)
+  const pct = (typeof d.oldPrice === 'number' && d.oldPrice > d.price) ? Math.round((1 - d.price/d.oldPrice) * 100) : 0;
   const ts = Date.parse(d.foundAt);
   // Im Browser gilt die lokale Zeitzone der Besucher:innen, beim Build Europe/Berlin.
   const date = isNaN(ts) ? '–' : new Date(ts).toLocaleString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Berlin'});
@@ -55,9 +56,9 @@ const cardHtml = d => {
             <div class="card-price-row">
               <div>
                 <div class="card-price">${escapeHtml(eur.format(d.price))}</div>
-                ${d.oldPrice ? `<div class="card-old">${escapeHtml(eur.format(d.oldPrice))}</div>` : ''}
+                ${pct >= 1 ? `<div class="card-old">${escapeHtml(eur.format(d.oldPrice))}</div>` : ''}
               </div>
-              ${pct ? `<div class="card-discount">-${pct}%</div>` : ''}
+              ${pct >= 1 ? `<div class="card-discount">−${pct}&nbsp;%</div>` : ''}
             </div>
             <div class="card-found">· Gefunden am: ${escapeHtml(date)}</div>
             <a class="card-btn" href="${escapeHtml(safeUrl(d.url))}" target="_blank" rel="nofollow sponsored">
