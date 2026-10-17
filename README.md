@@ -8,8 +8,10 @@ aktualisiert JavaScript sie danach alle 60 Sekunden.
 ## Lokal testen
 
 ```sh
-npm run build      # erzeugt dist/ (Node >= 18, keine Abhängigkeiten)
+npm run build      # erzeugt dist/ (Node >= 18; einzige Abhängigkeit: marked für den Blog)
 npx serve dist     # Vorschau unter http://localhost:3000
+npm run check      # interne Links und Anker in dist/ prüfen
+npm run check:blog # Blog-Artikel prüfen (Länge, Meta, FAQ-JSON-LD, Quellen)
 ```
 
 Mit nicht erreichbarer API bleibt der Build grün und die Platzhalter bleiben stehen:
@@ -17,6 +19,13 @@ Mit nicht erreichbarer API bleibt der Build grün und die Platzhalter bleiben st
 ```sh
 DEALS_API_URL=http://127.0.0.1:9/x.json npm run build
 ```
+
+## Blog
+
+Artikel liegen als Markdown in `content/blog/`, der Build erzeugt daraus `dist/blog/`
+(Übersicht, Artikelseiten, `feed.xml`, `search-index.json`, Sitemap-Einträge). Der Blog
+braucht die Deals-API nicht. Neuen Artikel anlegen: `npm run new-post`. Anleitung:
+`docs/BLOG_AUTHORING.md`, fachliche Prüfliste: `docs/BLOG_REVIEW.md`.
 
 ## Deployment
 

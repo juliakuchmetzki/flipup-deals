@@ -4,9 +4,15 @@
   "private": true,
   "description": "FlipUp Deals – statische Website mit Build-Zeit-Rendering der aktuellen Deals",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "check": "node scripts/check-links.js",
+    "check:blog": "node scripts/check-blog.js",
+    "new-post": "node scripts/new-post.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "marked": "18.1.1"
   }
 }
