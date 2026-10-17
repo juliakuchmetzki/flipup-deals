@@ -59,7 +59,7 @@ Die Garantie ist etwas anderes als die Gewährleistung. Sie ist ein freiwilliges
 
 Verkäufer verweisen bei einem Mangel manchmal auf den Hersteller. Die Verbraucherzentrale weist darauf hin, dass du darauf bestehen kannst, dass sich der Verkäufer um die Mängelbeseitigung kümmert.
 
-Seit dem 31. Juli 2026 gibt es für bestimmte Gerätegruppen außerdem ein Recht auf Reparatur gegenüber dem Hersteller, unter anderem für Fernseher, Monitore, Smartphones und Tablets. Die Verbraucherzentrale hat dazu eine Übersicht veröffentlicht, die Quelle findest du unten.
+Seit dem 31. Juli 2026 gibt es für bestimmte Gerätegruppen außerdem ein Recht auf Reparatur gegenüber dem Hersteller, unter anderem für Fernseher, Monitore, Smartphones und Tablets. Die Verbraucherzentrale hat dazu eine Übersicht veröffentlicht, die Quelle findest du unten. Die Reparatur beim Hersteller ist nicht kostenlos. Die kostenlose Mängelbeseitigung bleibt Sache der Gewährleistung gegenüber dem Verkäufer.
 
 ## Praxis-Checkliste bei einem Mangel
 
@@ -71,8 +71,6 @@ Seit dem 31. Juli 2026 gibt es für bestimmte Gerätegruppen außerdem ein Recht
 6. **Hilfe holen:** Die Verbraucherzentralen bieten den Umtausch-Check mit Musterbriefen an.
 
 Kaufst du in Aktionszeiten, hilft es, die Rückgabebedingungen schon vorher zu kennen: [Black Friday, Cyber Monday und Singles Day 2026](/blog/black-friday-cyber-monday-singles-day-2026.html). Wie du ein Angebot bewertest, steht in [Echte Rabatte erkennen](/blog/echte-rabatte-erkennen.html).
-
-*Dieser Artikel gibt einen Überblick und ersetzt keine Rechtsberatung.*
 
 ## Häufig gestellte Fragen
 
