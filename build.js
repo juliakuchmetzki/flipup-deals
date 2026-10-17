@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { buildBlog } = require('./scripts/lib/blog-build');
 
 const API_URL = process.env.DEALS_API_URL || 'https://api.flipup-deals.de/api/deals.json';
 const TIMEOUT_MS = 10000;
@@ -131,6 +132,7 @@ function updateSitemap() {
 async function main() {
   copyStatic();
   updateSitemap();
+  await buildBlog({ root: ROOT, dist: DIST });   // Blog hängt nicht von der API ab
 
   let deals = [];
   try {
