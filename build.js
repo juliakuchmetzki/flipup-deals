@@ -17,8 +17,9 @@ const MAX_CARDS = 60;
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
-const STATIC_FILE = /\.(html|png|jpe?g|svg|webp|ico|xml|txt|woff2?)$/i;
-const STATIC_DIRS = ['fonts'];
+const STATIC_FILE = /\.(html|css|js|png|jpe?g|svg|webp|ico|xml|txt|woff2?)$/i;
+const STATIC_EXCLUDE = ['build.js'];
+const STATIC_DIRS = ['assets', 'fonts'];
 
 const PLACEHOLDER = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
 
@@ -94,7 +95,7 @@ function copyStatic() {
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
   for (const entry of fs.readdirSync(ROOT, { withFileTypes: true })) {
-    if (entry.isFile() && STATIC_FILE.test(entry.name)) {
+    if (entry.isFile() && STATIC_FILE.test(entry.name) && !STATIC_EXCLUDE.includes(entry.name)) {
       fs.copyFileSync(path.join(ROOT, entry.name), path.join(DIST, entry.name));
     } else if (entry.isDirectory() && STATIC_DIRS.includes(entry.name)) {
       fs.cpSync(path.join(ROOT, entry.name), path.join(DIST, entry.name), { recursive: true });

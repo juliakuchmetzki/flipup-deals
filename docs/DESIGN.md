@@ -64,7 +64,7 @@ Folge für das Redesign: roter Akzent nur für Flächen, Linien, Punkte und gro�
 
 - Beide Seiten sind einzelne lange Seiten mit Ankernavigation; es gibt keine Karten-/Produktraster. Karten (`.network-card`, `.faq-item`, `.pricing-card`) sind bewusst flach und ruhig.
 - Favicons: `favicon-16/32/180/512.png` unter `assets/favicon/`, `apple-touch-icon` 180 px. JSON-LD (`Organization` bzw. `Person`), `canonical`, `og:title/description/type/url` (kein `og:image`).
-- Texte sind duzend, kurz, ohne Superlative. FlipUp-Seite nennt Amazon und Mitgliederzahlen (< 15): **beides wird auf flipup-deals.de nicht übernommen** (keine Amazon-Erwähnung, keine Zahlen).
+- Texte sind duzend, kurz, ohne Superlative. FlipUp-Seite nennt einen großen Marktplatz und Mitgliederzahlen (< 15): **beides wird auf flipup-deals.de nicht übernommen** (keine Erwähnung eines Marktplatzes, keine Zahlen).
 - Auf flipupde.de steht „ein Projekt von Johannes Kuchmetzki“ (Brunnenstr. 28, 10119 Berlin). Das Impressum von flipup-deals.de nennt dagegen **Julia Kuchmetzki, Chausseestraße 35b**. Das bleibt unangetastet, wird aber im About-Text per TODO-Kommentar markiert (Betreiber-Abgleich mit neuem Impressum).
 - Das Kontaktformular von johanneskuchmetzki.de ruft `api.web3forms.com` auf. Das wird **nicht** übernommen (keine neuen externen Requests).
 
@@ -111,8 +111,8 @@ Folge für das Redesign: roter Akzent nur für Flächen, Linien, Punkte und gro�
 3. Roter Akzent nie als Textfarbe, sondern `--accent-ink`, wegen Kontrast.
 4. Keine Fotos/Kollagen/Pricing-Karte/FAQ.
 
-### Offene Entscheidungen (bitte bestätigen)
+### Entscheidungen (bestätigt)
 
-1. **Caveat-Akzentwort** im Hero ja/nein (106 KB zusätzlich; sonst nur Space Grotesk + Inter).
-2. **Primärbutton dunkel** (wie johanneskuchmetzki.de, besserer Kontrast) statt rot (wie flipupde.de).
+1. **Caveat-Akzentwort** im Hero: ja, ein Wort („Deals“), ein Schriftschnitt, selbst gehostet, `font-display: swap`.
+2. **Primärbutton „Zum Angebot“ dunkel**, Hover `#b02c19`.
 3. Kein Dark Mode (wie die Referenzseiten).
