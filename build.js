@@ -110,8 +110,18 @@ function fillMarker(html, marker, value) {
   return html.split(marker).join(value);
 }
 
+// lastmod in dist/sitemap.xml auf das heutige Datum (Europe/Berlin) setzen
+function updateSitemap() {
+  const file = path.join(DIST, 'sitemap.xml');
+  if (!fs.existsSync(file)) return;
+  const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' }); // YYYY-MM-DD
+  const xml = fs.readFileSync(file, 'utf8').replace(/<lastmod>[^<]*<\/lastmod>/g, `<lastmod>${today}</lastmod>`);
+  fs.writeFileSync(file, xml);
+}
+
 async function main() {
   copyStatic();
+  updateSitemap();
 
   let deals = [];
   try {
