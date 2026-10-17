@@ -42,7 +42,6 @@ Das ist der Kern der gemeinsamen Marke: gleiche Struktur, andere Akzentfarbe.
 | `--accent-ink` | `#b02c19` | `#14503f` |
 | `--border` | `#ecdcd4` | `#dfe3da` |
 | Fehlerfarbe | – | `#b3261e` |
-| Discord-Button | `#5865f2` / Hover `#4752c4` | – |
 
 Der Primärbutton ist bei flipupde.de **rot** (`--accent`), bei johanneskuchmetzki.de **dunkel** (`--text`, Hover `--accent-ink`).
 
