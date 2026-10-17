@@ -57,9 +57,9 @@ const cardHtml = d => {
               </div>
               ${pct ? `<div class="card-discount">-${pct}%</div>` : ''}
             </div>
-            <div class="card-found">· Found at: ${escapeHtml(date)}</div>
+            <div class="card-found">· Gefunden am: ${escapeHtml(date)}</div>
             <a class="card-btn" href="${escapeHtml(safeUrl(d.url))}" target="_blank" rel="nofollow sponsored">
-              Get Deal 🛒
+              Zum Angebot 🛒
             </a>
           </div>
         </div>
