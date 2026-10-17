@@ -708,7 +708,10 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
 .legal-prose .legal-copyright { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
 
 /* Über uns */
-.about-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.5rem 0 1rem; padding: 0; list-style: none; }
+.prose .lede { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; }
+.prose .about-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.5rem 0 1rem; padding: 0; list-style: none; }
+.prose .about-chips li { margin: 0; }
+.prose .discord-box,
 .discord-box {
   display: flex;
   align-items: center;
@@ -722,7 +725,9 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
   line-height: 1.4;
   text-decoration: none;
 }
-.discord-box:hover { background: #4752c4; }
+.prose a.discord-box { color: #fff; text-decoration: none; }
+.prose .discord-box:hover,
+.discord-box:hover { background: #4752c4; color: #fff; text-decoration: none; }
 .discord-box strong { display: block; font-size: 1rem; }
 .discord-box svg { flex-shrink: 0; }
 
