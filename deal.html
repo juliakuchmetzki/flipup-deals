@@ -82,43 +82,6 @@
       border-radius: 4px;
     }
 
-    .btn-primary {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      background: #FF9900;
-      color: #fff;
-      text-decoration: none;
-      padding: 13px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      transition: background 0.12s;
-      margin-bottom: 0.75rem;
-    }
-    .btn-primary:hover { background: #e68a00; }
-
-    .btn-secondary {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      background: #fff;
-      color: #111;
-      text-decoration: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      border: 1px solid #e5e5e5;
-      transition: background 0.12s;
-      margin-bottom: 0.75rem;
-    }
-    .btn-secondary:hover { background: #f5f5f5; }
-
     .btn-alza {
       display: flex;
       align-items: center;
@@ -144,12 +107,6 @@
       line-height: 1.6;
       border-top: 1px solid #f0f0f0;
       padding-top: 1rem;
-    }
-
-    .asin-row {
-      font-size: 11px;
-      color: #bbb;
-      margin-bottom: 1rem;
     }
 
     .back-link {
@@ -182,21 +139,9 @@
 </main>
 
 <script>
-  const FLAGS = { de:'🇩🇪', fr:'🇫🇷', it:'🇮🇹', es:'🇪🇸', at:'🇦🇹' };
-  const DOMAINS = { de:'amazon.de', fr:'amazon.fr', it:'amazon.it', es:'amazon.es', at:'amazon.at' };
-
-  const TAGS = {
-    de: 'flipupdeals-21',
-    fr: 'flipupdeals06-21',
-    it: 'flipupdeal00a-21',
-    es: 'flipupdeals0a-21',
-    at: 'flipupdeals-21',
-  };
-
- async function loadDeal() {
+  async function loadDeal() {
     const params = new URLSearchParams(window.location.search);
     const asin = params.get('asin');
-    const urlEk = params.get('ek') || 'de';
 
     // Deal aus API laden
     let deal = null;
@@ -205,8 +150,7 @@
       if (r.ok) {
         const deals = await r.json();
         if (asin && asin !== 'null') {
-          deal = deals.find(d => d.asin === asin && d.marketplace === 'de');
-          if (!deal) deal = deals.find(d => d.asin === asin);
+          deal = deals.find(d => d.asin === asin);
         }
       }
     } catch {}
@@ -217,30 +161,22 @@
       return;
     }
 
-    if (!asin || asin === 'null') {
-      document.getElementById('card').innerHTML = '<div class="loading">Kein Deal gefunden.</div>';
+    // Kein Shop-Deal (und kein Alza-Link): zurück zur Startseite
+    if (!deal?.alza_link) {
+      window.location.replace('/');
       return;
     }
 
-    const ekMarketplace = deal?.ek_marketplace || urlEk;
-    const ekTag    = TAGS[ekMarketplace] || TAGS.de;
-    const ekFlag   = FLAGS[ekMarketplace] || '🛒';
-    const ekDomain = DOMAINS[ekMarketplace] || 'amazon.de';
-
-    const ekUrl = `https://www.${ekDomain}/dp/${asin}?tag=${ekTag}&linkCode=ogi&th=1&psc=1`;
-    const deUrl = `https://www.amazon.de/dp/${asin}?tag=${TAGS.de}&linkCode=ogi&th=1&psc=1`;
-
-    const title    = deal?.title    || 'Produkt auf Amazon ansehen';
-    const price    = deal?.price    ? `€${deal.price.toFixed(2)}`    : null;
-    const oldPrice = deal?.oldPrice ? `€${deal.oldPrice.toFixed(2)}` : null;
-    const pct      = (deal?.price && deal?.oldPrice) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : null;
-    const image    = deal?.image    || `https://m.media-amazon.com/images/I/${asin}._SL500_.jpg`;
-    const alzaLink = deal?.alza_link || null;
+    const title    = deal.title || 'Angebot ansehen';
+    const price    = deal.price    ? `€${deal.price.toFixed(2)}`    : null;
+    const oldPrice = deal.oldPrice ? `€${deal.oldPrice.toFixed(2)}` : null;
+    const pct      = (deal.price && deal.oldPrice) ? Math.round((1 - deal.price / deal.oldPrice) * 100) : null;
+    const image    = deal.image || '';
+    const alzaLink = deal.alza_link;
 
     document.title = `${title.substring(0, 60)} – FlipUp Deals`;
 
-    const showDeButton = ekMarketplace !== 'de';
-    const disclosureAlza = alzaLink ? ' Für Alza-Links gilt ebenfalls eine Affiliate-Partnerschaft.' : '';
+    const disclosureAlza = ' Für Alza-Links gilt eine Affiliate-Partnerschaft.';
 
     document.getElementById('card').innerHTML = `
       <a href="/" class="back-link">← Zurück zu allen Deals</a>
@@ -253,24 +189,13 @@
         ${oldPrice ? `<div class="old-price">${oldPrice}</div>` : ''}
         ${pct ? `<div class="discount">-${pct}%</div>` : ''}
       </div>` : ''}
-      <div class="asin-row">ASIN: ${asin}</div>
 
-      <a class="btn-primary" href="${ekUrl}" target="_blank" rel="nofollow sponsored">
-        ${ekFlag} Bei ${ekDomain} ansehen →
+      <a class="btn-alza" href="${alzaLink}" target="_blank" rel="nofollow sponsored">
+        🔵 Bei Alza ansehen →
       </a>
 
-      ${showDeButton ? `
-      <a class="btn-secondary" href="${deUrl}" target="_blank" rel="nofollow sponsored">
-        🇩🇪 Auch bei amazon.de ansehen →
-      </a>` : ''}
-
-      ${alzaLink ? `
-      <a class="btn-alza" href="${alzaLink}" target="_blank" rel="nofollow sponsored">
-        🔵 Auch bei Alza ansehen →
-      </a>` : ''}
-
       <div class="disclosure">
-        * Als Amazon-Affiliate-Partner verdienen wir an qualifizierten Verkäufen.${disclosureAlza}
+        * Werbung: Bei einem Kauf über Affiliate-Links erhalten wir eine Provision.${disclosureAlza}
         Für dich entstehen keine Mehrkosten.
       </div>
     `;
