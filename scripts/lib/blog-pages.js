@@ -85,7 +85,8 @@ function coverHtml(p) {
 </div>`;
 }
 
-const metaLine = p => `<p class="post-meta">${monogram()}<span>${esc(AUTHOR)}</span><span class="sep" aria-hidden="true">·</span><time datetime="${p.date}">${formatDate(p.date)}</time><span class="sep" aria-hidden="true">·</span><span>${p.minutes} Min.</span></p>`;
+// Karten-Zeile: Monogramm · Datum · Lesezeit (der Autorenname steht nur für Screenreader im Text)
+const metaLine = p => `<p class="post-meta">${monogram()}<span class="visually-hidden">Von ${esc(AUTHOR)}, </span><time datetime="${p.date}">${formatDate(p.date)}</time><span class="sep" aria-hidden="true">·</span><span>${p.minutes} Min.</span></p>`;
 
 function postCard(p, variant = '') {
   const cls = `post-card${variant ? ` post-card--${variant}` : ''}`;

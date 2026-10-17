@@ -133,4 +133,8 @@
     }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
     headings.forEach(function (h) { io.observe(h); });
   }
+  // ---------- Druck: alle FAQ-Einträge aufklappen ----------
+  window.addEventListener('beforeprint', function () {
+    [].slice.call(document.querySelectorAll('details.faq-item')).forEach(function (d) { d.open = true; });
+  });
 })();
