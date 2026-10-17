@@ -22,3 +22,10 @@ DEALS_API_URL=http://127.0.0.1:9/x.json npm run build
 
 Vercel führt `npm run build` aus und liefert `dist/` aus (siehe `vercel.json`).
 Zum regelmäßigen Aktualisieren der vorgerenderten Deals siehe [docs/DEPLOY_HOOK.md](docs/DEPLOY_HOOK.md).
+
+## Design
+
+Gemeinsames Stylesheet `assets/style.css` (Tokens, Komponenten, Druck-CSS) und `assets/site.js`
+(Header-Pille, mobiles Menü); Schriften liegen lokal in `fonts/`. Konzept und Entscheidungen:
+[docs/DESIGN.md](docs/DESIGN.md), Screenshots: `docs/screenshots/`.
+Das Karten-Markup steht im SYNC-Block von `index.html` und `build.js` und muss identisch bleiben.
