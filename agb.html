@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGB – FlipUp Deals</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/inter.css" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #f5f5f5; color: #111; font-family: 'Inter', sans-serif; min-height: 100vh; }
@@ -47,16 +48,15 @@
 
 <header>
   <a href="/" class="logo">
-    <img src="https://i.ibb.co/GBfz3qm/flipuplogo.png" alt="FlipUp" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" />
+    <img src="/flipuplogo.webp" alt="FlipUp" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" />
     <div class="logo-name">FlipUp <span>Deals</span></div>
   </a>
 </header>
 
 <main>
   <div class="card">
-    <h1>Allgemeine Geschäftsbedingungen</h1>
-    <p class="updated">Stand: April 2026</p>
-
+    <!-- RECHTSTEXT-START -->
+    <h1>Allgemeine Geschäftsbedingungen mit Kundeninformationen</h1>
     <div class="toc">
       <p>Inhaltsverzeichnis</p>
       <ol>
@@ -71,110 +71,38 @@
     </div>
 
     <h2 id="geltungsbereich">1) Geltungsbereich</h2>
-    <p>
-      1.1 Diese Allgemeinen Geschäftsbedingungen (nachfolgend „AGB") der Julia Kuchmetzki,
-      handelnd unter „FlipUp Deals" (nachfolgend „Vermittlerin"), gelten für alle Verträge über die
-      Vermittlung von Verträgen (nachfolgend „Hauptvertrag"), die ein Verbraucher oder Unternehmer
-      (nachfolgend „Kunde") mit der Vermittlerin über die Website der Vermittlerin abschließt.
-      Hiermit wird der Einbeziehung von eigenen Bedingungen des Kunden widersprochen, es sei denn,
-      es ist etwas anderes vereinbart.
-    </p>
-    <p>
-      1.2 Verbraucher im Sinne dieser AGB ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken
-      abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit
-      zugerechnet werden können. Unternehmer im Sinne dieser AGB ist eine natürliche oder juristische Person
-      oder eine rechtsfähige Personengesellschaft, die bei Abschluss eines Rechtsgeschäfts in Ausübung ihrer
-      gewerblichen oder selbständigen beruflichen Tätigkeit handelt.
-    </p>
-
-    <div class="section">
-      <h2 id="vertragsgegenstand">2) Vertragsgegenstand</h2>
-      <p>
-        Gegenstand des in diesen AGB geregelten Vertrages zwischen dem Kunden und der Vermittlerin ist die
-        Vermittlung von Verträgen, die zwischen dem Kunden und einem Drittanbieter (nachfolgend „Anbieter")
-        geschlossen werden. Der Inhalt des Hauptvertrages ergibt sich aus der jeweiligen Artikel- bzw.
-        Leistungsbeschreibung auf der Website des jeweiligen Anbieters.
-      </p>
-      <p>
-        Die Leistungspflicht der Vermittlerin beschränkt sich darauf, den Kunden über ihre Website per
-        elektronischer Verlinkung auf das Angebot des jeweiligen Anbieters weiterzuleiten. Die Vermittlerin
-        wird nicht selbst Partei des Hauptvertrages.
-      </p>
-      <p>
-        Die Vermittlerin übernimmt keine Gewähr dafür, dass zwischen Kunde und Anbieter tatsächlich ein
-        Vertrag zustande kommt. Die Erfüllung des Hauptvertrages erfolgt nicht durch die Vermittlerin,
-        sondern durch den jeweiligen Anbieter.
-      </p>
-    </div>
-
-    <div class="section">
-      <h2 id="vertragsschluss">3) Vertragsschluss</h2>
-      <p>
-        3.1 Die Vermittlerin stellt dem Kunden auf ihrer Website Affiliate-Links bereit, über die der Kunde
-        per Mausklick auf die Angebote der jeweiligen Anbieter weitergeleitet wird. Die Bereitstellung dieser
-        Links stellt ein verbindliches Angebot der Vermittlerin auf Abschluss eines Vermittlungsvertrages dar,
-        welches der Kunde annehmen kann, indem er den jeweiligen Link anklickt.
-      </p>
-      <p>
-        3.2 Der Vertragstext hinsichtlich der Vermittlung wird von der Vermittlerin weder gespeichert noch
-        ist er dem Kunden nach Abgabe seiner Vertragserklärung zugänglich.
-      </p>
-      <p>
-        3.3 Für den Vertragsschluss steht die deutsche Sprache zur Verfügung.
-      </p>
-    </div>
-
-    <div class="section">
-      <h2 id="verguetung">4) Vergütung</h2>
-      <p>
-        Die Vermittlung des Hauptvertrages erfolgt für den Kunden unentgeltlich. Die dem Kunden durch den
-        vermittelten Hauptvertrag ggf. entstehenden Kosten werden im Angebot des jeweiligen Anbieters
-        mitgeteilt und direkt vom Anbieter mit dem Kunden abgerechnet.
-      </p>
-    </div>
-
-    <div class="section">
-      <h2 id="leistungsstoerungen">5) Leistungsstörungen</h2>
-      <p>
-        5.1 Für Leistungsstörungen im Zusammenhang mit der Vermittlung von Verträgen haftet die Vermittlerin
-        dem Kunden nach den gesetzlichen Vorschriften.
-      </p>
-      <p>
-        5.2 Die Vermittlerin haftet nicht für Leistungsstörungen im Hauptvertrag zwischen Kunde und Anbieter.
-        Ansprüche wegen Leistungsstörungen im Hauptvertrag hat der Kunde direkt gegenüber dem jeweiligen
-        Anbieter geltend zu machen.
-      </p>
-    </div>
-
-    <div class="section">
-      <h2 id="recht">6) Anwendbares Recht</h2>
-      <p>
-        Für sämtliche Rechtsbeziehungen der Parteien gilt das Recht der Bundesrepublik Deutschland.
-        Bei Verbrauchern gilt diese Rechtswahl nur insoweit, als nicht der gewährte Schutz durch zwingende
-        Bestimmungen des Rechts des Staates, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat,
-        entzogen wird.
-      </p>
-    </div>
-
-    <div class="section">
-      <h2 id="streit">7) Alternative Streitbeilegung</h2>
-      <p>
-        Die Vermittlerin ist zur Teilnahme an einem Streitbeilegungsverfahren vor einer
-        Verbraucherschlichtungsstelle weder verpflichtet noch bereit.
-      </p>
-    </div>
+    <p>1.1 Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") des Johannes Kuchmetzki, handelnd unter „Johannes Kuchmetzki“ (nachfolgend "Vermittler"), gelten für alle Verträge über die Vermittlung von Verträgen (nachfolgend „Hauptvertrag“), die ein Verbraucher oder Unternehmer (nachfolgend „Kunde) mit dem Vermittler über die Website des Vermittlers abschließt. Hiermit wird der Einbeziehung von eigenen Bedingungen des Kunden widersprochen, es sei denn, es ist etwas anderes vereinbart.</p>
+    <p>1.2 Verbraucher im Sinne dieser AGB ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschließt, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können. Unternehmer im Sinne dieser AGB ist eine natürliche oder juristische Person oder eine rechtsfähige Personengesellschaft, die bei Abschluss eines Rechtsgeschäfts in Ausübung ihrer gewerblichen oder selbständigen beruflichen Tätigkeit handelt.</p>
+    <h2 id="vertragsgegenstand">2) Vertragsgegenstand</h2>
+    <p>Gegenstand des in diesen AGB geregelten Vertrages zwischen dem Kunden und dem Vermittler ist die Vermittlung von Verträgen, die zwischen dem Kunden und einem Drittanbieter (nachfolgend „Anbieter“) geschlossen werden. Der Inhalt des Hauptvertrages ergibt sich aus der jeweiligen Artikel- bzw. Leistungsbeschreibung auf der Website des jeweiligen Anbieters. Die Leistungspflicht des Vermittlers beschränkt sich darauf, den Kunden über seine Website per elektronischer Verlinkung auf das Angebot des jeweiligen Anbieters weiterzuleiten. Der Vermittler wird nicht selbst Partei des Hauptvertrages und nimmt auch keine Willenserklärungen, die den Hauptvertrag betreffen, entgegen. Ferner übernimmt der Vermittler keine Gewähr dafür, dass zwischen Kunde und Anbieter tatsächlich ein Vertrag zustande kommt. Die Erfüllung des Hauptvertrages erfolgt nicht durch den Vermittler sondern durch den jeweiligen Anbieter. Für den Hauptvertrag gelten die gesetzlichen Bestimmungen im Verhältnis zwischen Kunde und Anbieter sowie ggf. hiervon abweichende Vertragsbedingungen des jeweiligen Anbieters.</p>
+    <h2 id="vertragsschluss">3) Vertragsschluss</h2>
+    <p>3.1 Der Vermittler stellt dem Kunden auf seiner Website diverse Werbelinks bzw. Werbebanner bereit, über die der Kunde per Mouseklick auf die Angebote der jeweiligen Anbieter weitergeleitet wird. Die Bereitstellung dieser Werbelinks bzw. Werbebanner stellt ein verbindliches Angebot des Vermittlers auf Abschluss eines Vermittlungsvertrages dar, welches der Kunde annehmen kann, indem er mit der Mouse auf den jeweiligen Werbelink bzw. Werbebanner klickt.</p>
+    <p>3.2 Der Vertragstext hinsichtlich der Vermittlung wird vom Vermittler weder gespeichert noch ist er dem Kunden nach Abgabe seiner Vertragserklärung zugänglich.</p>
+    <p>3.3 Für den Vertragsschluss steht die deutsche Sprache zur Verfügung.</p>
+    <h2 id="verguetung">4) Vergütung</h2>
+    <p>Die Vermittlung des Hauptvertrages erfolgt für den Kunden unentgeltlich. Die dem Kunden durch den vermittelten Hauptvertrag ggf. entstehenden Kosten werden dem Kunden im Angebot des jeweiligen Anbieters mitgeteilt und im Falle eines Vertragsabschlusses direkt vom Anbieter mit dem Kunden abgerechnet. Insoweit gelten die gesetzlichen Bestimmungen im Verhältnis zwischen Kunde und Anbieter sowie ggf. hiervon abweichende Vertragsbedingungen des jeweiligen Anbieters.</p>
+    <h2 id="leistungsstoerungen">5) Leistungsstörungen</h2>
+    <p>5.1 Für Leistungsstörungen im Zusammenhang mit der Vermittlung von Verträgen im Verhältnis zwischen Vermittler und Kunde haftet der Vermittler dem Kunden nach den gesetzlichen Vorschriften.</p>
+    <p>5.2 Der Vermittler haftet nicht für Leistungsstörungen im Hauptvertrag zwischen Kunde und Anbieter. Ansprüche wegen Leistungsstörungen im Hauptvertrag hat der Kunde direkt gegenüber dem jeweiligen Anbieter geltend zu machen.</p>
+    <h2 id="recht">6) Anwendbares Recht</h2>
+    <p>Für sämtliche Rechtsbeziehungen der Parteien gilt das Recht der Bundesrepublik Deutschland. Bei Verbrauchern gilt diese Rechtswahl nur insoweit, als nicht der durch zwingende Bestimmungen des Rechts des Staates, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat, gewährte Schutz entzogen wird.</p>
+    <h2 id="streit">7) Alternative Streitbeilegung</h2>
+    <p>Der Vermittler ist zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle weder verpflichtet noch bereit.</p>
+    <p class="legal-copyright">Copyright-Hinweis: Diese AGB wurden von den Fachanwälten der IT-Recht Kanzlei erstellt und sind urheberrechtlich geschützt (<a href="https://www.it-recht-kanzlei.de" target="_blank" rel="noopener">https://www.it-recht-kanzlei.de</a>)</p>
+    <p class="updated">Stand: 17.10.2026, 14:43:23</p>
+    <!-- RECHTSTEXT-ENDE -->
   </div>
 </main>
 
 <footer>
   <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
   <div class="footer-links">
+    <a href="/about.html">Über uns</a>
     <a href="/impressum.html">Impressum</a>
     <a href="/datenschutz.html">Datenschutz</a>
     <a href="/agb.html">AGB</a>
   </div>
 </footer>
 
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
 </html>

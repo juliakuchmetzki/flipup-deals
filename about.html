@@ -6,7 +6,8 @@
   <title>Über uns – FlipUp Deals</title>
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="description" content="Erfahre mehr über FlipUp Deals – wer wir sind, wie wir Deals kuratieren und was die FlipUp Community ausmacht." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/inter.css" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #f5f5f5; color: #111; font-family: 'Inter', sans-serif; min-height: 100vh; }
@@ -31,13 +32,6 @@
       padding: 6px 14px; border-radius: 20px;
       font-size: 13px; font-weight: 500; color: #111;
     }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 1rem; }
-    .stat {
-      background: #fff; border: 1px solid #e5e5e5;
-      border-radius: 10px; padding: 1.25rem; text-align: center;
-    }
-    .stat-number { font-size: 1.75rem; font-weight: 700; color: #9d0208; }
-    .stat-label { font-size: 12px; color: #999; margin-top: 4px; }
     .discord-box {
       background: #5865F2; color: #fff;
       border-radius: 10px; padding: 1.5rem;
@@ -59,7 +53,6 @@
     .footer-links a { font-size: 12px; color: #999; text-decoration: none; }
     .footer-links a:hover { color: #111; }
     @media (max-width: 600px) {
-      .stats { grid-template-columns: repeat(2, 1fr); }
       main { padding: 2rem 1rem; }
     }
   </style>
@@ -68,7 +61,7 @@
 
 <header>
   <a href="/" class="logo">
-    <img src="https://i.ibb.co/GBfz3qm/flipuplogo.png" alt="FlipUp" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" />
+    <img src="/flipuplogo.webp" alt="FlipUp" style="width:32px;height:32px;border-radius:6px;object-fit:cover;" />
     <div class="logo-name">FlipUp <span>Deals</span></div>
   </a>
 </header>
@@ -79,46 +72,23 @@
 
   <div class="section">
     <h2>Was ist FlipUp Deals?</h2>
-    <p>FlipUp Deals ist ein shopübergreifender Deal-Aggregator, der täglich die besten Angebote aus verschiedenen Online-Shops aufspürt und übersichtlich an einem Ort präsentiert. Wir durchsuchen kontinuierlich die Angebote von Coolblue, Euronics, Notebooksbilliger, Expert, Otto, Amazon und weiteren Händlern – damit du nichts verpasst.</p>
+    <p>FlipUp Deals ist ein shopübergreifender Deal-Aggregator, der täglich die besten Angebote aus verschiedenen Online-Shops aufspürt und übersichtlich an einem Ort präsentiert. Wir durchsuchen kontinuierlich die Angebote von Coolblue, Euronics und Notebooksbilliger – damit du nichts verpasst.</p>
   </div>
 
   <div class="section">
-    <h2>Unsere Partner-Shops</h2>
-    <p>Wir aggregieren Deals aus einer Vielzahl von deutschen und europäischen Online-Shops:</p>
+    <h2>Unsere Shops</h2>
+    <p>Aktuell findest du bei uns Deals aus diesen Shops:</p>
     <div class="shops">
-      <span class="shop-tag">Amazon</span>
       <span class="shop-tag">Coolblue</span>
       <span class="shop-tag">Euronics</span>
       <span class="shop-tag">Notebooksbilliger</span>
-      <span class="shop-tag">Expert</span>
-      <span class="shop-tag">Otto</span>
-      <span class="shop-tag">Galeria</span>
-      <span class="shop-tag">Tink</span>
-      <span class="shop-tag">Globus Baumarkt</span>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Unsere Zahlen</h2>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-number">100+</div>
-        <div class="stat-label">Deals täglich</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Community-Mitglieder</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">9+</div>
-        <div class="stat-label">Partner-Shops</div>
-      </div>
     </div>
   </div>
 
   <div class="section">
     <h2>Wie wir Deals kuratieren</h2>
-    <p>Unsere Deals werden automatisch aus offiziellen Produkt-Feeds und APIs der Partner-Shops aggregiert und täglich aktualisiert. Dabei filtern wir gezielt nach echten Rabatten gegenüber dem UVP. Zusätzlich werden ausgewählte Deals manuell geprüft und in unserer Discord-Community geteilt.</p>
+    <!-- TODO (Betreiber): Aussage zur Datenquelle auf Richtigkeit prüfen -->
+    <p>Unsere Deals werden automatisch erfasst und regelmäßig aktualisiert. Ausgewählte Deals prüfen wir zusätzlich manuell und teilen sie in unserer Discord-Community.</p>
   </div>
 
   <div class="section">
@@ -142,13 +112,12 @@
 <footer>
   <p>© 2026 FlipUp Deals. Alle Rechte vorbehalten.</p>
   <div class="footer-links">
+    <a href="/about.html">Über uns</a>
     <a href="/impressum.html">Impressum</a>
     <a href="/datenschutz.html">Datenschutz</a>
     <a href="/agb.html">AGB</a>
-    <a href="/about.html">Über uns</a>
   </div>
 </footer>
 
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
 </html>
