@@ -359,6 +359,7 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
   margin: 0 auto 20px;
   color: var(--text-muted);
   font-size: 1.05rem;
+  text-wrap: balance;
 }
 
 .trust {
@@ -445,8 +446,11 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
   border-radius: var(--radius-pill);
   font-size: 0.92rem;
 }
-.field { flex: 1 1 200px; }
-.field-sort { flex: 0 1 220px; }
+.field { flex: 1 1 100%; }
+@media (min-width: 480px) {
+  .field { flex: 1 1 200px; }
+  .field-sort { flex: 0 1 220px; }
+}
 .field input::placeholder { color: var(--text-muted); opacity: 1; }
 
 @media (min-width: 768px) {
@@ -494,6 +498,7 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
 /* ---------- Deal-Karte ---------- */
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -507,12 +512,14 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
 
 .card-media {
   position: relative;
+  overflow: hidden;
   aspect-ratio: 4 / 3;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
 .card-media img {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   padding: 12px;
@@ -586,6 +593,14 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
   font-weight: 700;
   line-height: 1.4;
   white-space: nowrap;
+}
+
+.card .badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  margin: 0;
+  box-shadow: 0 2px 8px -2px rgba(34, 21, 18, 0.25);
 }
 
 .card-found { margin: 0; color: var(--text-muted); font-size: 0.78rem; }
@@ -735,8 +750,8 @@ button.chip[aria-pressed="true"] { background: var(--text); border-color: var(--
   border-radius: var(--radius-l);
   box-shadow: var(--shadow-card);
 }
-.detail-media { position: relative; aspect-ratio: 4 / 3; background: var(--surface); border-radius: var(--radius-m); border: 1px solid var(--border); }
-.detail-media img { display: block; width: 100%; height: 100%; padding: 16px; object-fit: contain; }
+.detail-media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--surface); border-radius: var(--radius-m); border: 1px solid var(--border); }
+.detail-media img { position: absolute; inset: 0; width: 100%; height: 100%; padding: 16px; object-fit: contain; }
 .detail-media.card-media-empty { background: var(--bg-alt); }
 .detail-info { display: flex; flex-direction: column; gap: 12px; }
 .detail-meta { margin: 0; color: var(--text-muted); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
