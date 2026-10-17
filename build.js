@@ -23,7 +23,7 @@ const STATIC_DIRS = ['fonts'];
 const PLACEHOLDER = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22200%22 height=%22200%22 fill=%22%23f5f5f5%22/></svg>';
 
 // Markup synchron halten: Die Funktionen escapeHtml, safeUrl, isValidDeal, byNewest,
-// eur, countText, shopsHtml und cardHtml existieren identisch im <script> von index.html.
+// eur, countText, CATEGORIES, navHtml, shopsHtml und cardHtml existieren identisch im <script> von index.html.
 const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl = v => { try { const u = new URL(v); return (u.protocol === 'https:' || u.protocol === 'http:') ? String(v) : ''; } catch { return ''; } };
 
@@ -34,6 +34,13 @@ const byNewest = (a, b) => (Date.parse(b.foundAt) - Date.parse(a.foundAt)) || 0;
 const eur = new Intl.NumberFormat('de-DE', {style:'currency', currency:'EUR'});
 
 const countText = n => `${n} Deal${n !== 1 ? 's' : ''}`;
+
+// Nur Kategorien mit mindestens einem Deal anzeigen ("Alle" steht fest im HTML)
+const CATEGORIES = [['elektronik', '💻 Elektronik'], ['haushalt', '🏠 Haushalt'], ['sport', '🏃 Sport'], ['mode', '👗 Mode'], ['sonstiges', '📦 Sonstiges']];
+const navHtml = (deals, current = 'all') => CATEGORIES
+  .filter(([key]) => deals.some(d => d.kategorie === key))
+  .map(([key, label]) => `<button class="nav-btn${key === current ? ' active' : ''}" data-kat="${key}" onclick="filterDeals('${key}')">${label}</button>`)
+  .join('');
 
 const shopsHtml = shops => shops.length
   ? `<span>Deals von:</span>` + shops.map(s => `<span>🛒 ${escapeHtml(s)}</span>`).join('')
@@ -119,6 +126,7 @@ async function main() {
   let html = fs.readFileSync(file, 'utf8');
   const shops = [...new Set(deals.map(d => d.shop))];
   html = fillMarker(html, '<!--DEALS_COUNT-->', countText(deals.length));
+  html = fillMarker(html, '<!--DEALS_NAV-->', navHtml(deals));
   html = fillMarker(html, '<!--DEALS_SHOPS-->', shopsHtml(shops));
   html = fillMarker(html, '<!--DEALS_GRID-->', deals.slice(0, MAX_CARDS).map(cardHtml).join(''));
   fs.writeFileSync(file, html);
