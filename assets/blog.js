@@ -76,4 +76,61 @@
     state.cat = catFromHash();
     if (state.cat) apply();
   }
+  // ---------- Artikel: Link kopieren ----------
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  [].slice.call(document.querySelectorAll('[data-copy-link]')).forEach(function (btn) {
+    var label = btn.querySelector('[data-copy-label]');
+    var status = btn.closest('.share').querySelector('.share-status');
+    var original = label.textContent;
+    var timer = null;
+
+    function feedback(ok) {
+      var msg = ok ? 'Link kopiert' : 'Kopieren nicht möglich';
+      label.textContent = msg;
+      if (status) status.textContent = msg;
+      clearTimeout(timer);
+      timer = setTimeout(function () { label.textContent = original; if (status) status.textContent = ''; }, 2000);
+    }
+
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-copy-link');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(function () { feedback(true); }, function () { feedback(fallbackCopy(url)); });
+      } else {
+        feedback(fallbackCopy(url));
+      }
+    });
+  });
+
+  // ---------- Artikel: Inhaltsverzeichnis hervorheben ----------
+  var headings = [].slice.call(document.querySelectorAll('.post h2[id]'));
+  var tocLinks = [].slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+  if (headings.length && tocLinks.length && 'IntersectionObserver' in window) {
+    var visible = {};
+    var setActive = function (id) {
+      tocLinks.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + id;
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+      var first = headings.filter(function (h) { return visible[h.id]; })[0];
+      if (first) setActive(first.id);
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    headings.forEach(function (h) { io.observe(h); });
+  }
 })();

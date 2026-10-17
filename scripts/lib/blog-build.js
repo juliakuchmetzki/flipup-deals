@@ -3,8 +3,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { loadPosts, pickLead } = require('./blog-content');
-const { readChrome, overviewPage } = require('./blog-pages');
+const { loadPosts, pickLead, renderPost } = require('./blog-content');
+const { readChrome, overviewPage, articlePage } = require('./blog-pages');
 const { searchIndex, feedXml, addToSitemap } = require('./blog-output');
 
 async function buildBlog({ root, dist }) {
@@ -24,10 +24,15 @@ async function buildBlog({ root, dist }) {
   const chrome = readChrome(root);
   fs.writeFileSync(path.join(out, 'index.html'), overviewPage(posts, chrome, pickLead(posts)));
 
+  for (const p of posts) {
+    const rendered = await renderPost(p);
+    fs.writeFileSync(path.join(out, `${p.slug}.html`), articlePage(p, rendered, posts, chrome));
+  }
+
   const sm = path.join(dist, 'sitemap.xml');
   if (fs.existsSync(sm)) fs.writeFileSync(sm, addToSitemap(fs.readFileSync(sm, 'utf8'), posts));
 
-  console.log(`[build] Blog: ${posts.length} Artikel (index.html, search-index.json, feed.xml, Sitemap).`);
+  console.log(`[build] Blog: ${posts.length} Artikel (index.html, Artikelseiten, search-index.json, feed.xml, Sitemap).`);
   return posts;
 }
 

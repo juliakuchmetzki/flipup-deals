@@ -170,4 +170,150 @@ ${posts.map(p => postCard(p)).join('\n')}
   return pageShell({ head, header: headerFor(chrome, '/blog/'), footer: chrome.footer, main });
 }
 
-module.exports = { readChrome, headerFor, pageHead, pageShell, coverHtml, metaLine, monogram, postCard, categoriesOf, overviewPage, CATEGORY_ORDER };
+
+// ---------- Artikelseite ----------
+
+const ICON_SHARE = '<svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
+const ICON_LINK = '<svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.4"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.33-1.33"/></svg>';
+
+function shareHtml(p, variant) {
+  const url = `${SITE}/blog/${p.slug}.html`;
+  const enc = encodeURIComponent;
+  const x = `https://twitter.com/intent/tweet?url=${enc(url)}&amp;text=${enc(p.title)}`;
+  const li = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+  return `<div class="share share--${variant}">
+<p class="share-title" id="share-title-${variant}">Teilen</p>
+<ul class="share-list" aria-labelledby="share-title-${variant}">
+<li><a class="share-link" href="${x}" target="_blank" rel="noopener noreferrer">${ICON_SHARE}<span>Auf X teilen</span></a></li>
+<li><a class="share-link" href="${li}" target="_blank" rel="noopener noreferrer">${ICON_SHARE}<span>Auf LinkedIn teilen</span></a></li>
+<li class="js-only"><button class="share-link" type="button" data-copy-link="${url}">${ICON_LINK}<span data-copy-label>Link kopieren</span></button></li>
+</ul>
+<p class="share-status visually-hidden" role="status" aria-live="polite"></p>
+</div>`;
+}
+
+const tocList = toc => `<ol>\n${toc.map(t => `<li><a href="#${esc(t.id)}">${esc(t.text)}</a></li>`).join('\n')}\n</ol>`;
+
+function relatedPosts(post, all) {
+  const others = all.filter(p => p.slug !== post.slug);
+  return [...others.filter(p => p.categorySlug === post.categorySlug), ...others.filter(p => p.categorySlug !== post.categorySlug)].slice(0, 3);
+}
+
+function articlePage(post, r, all, chrome) {
+  const url = `${SITE}/blog/${post.slug}.html`;
+  const modified = post.updated || post.date;
+  const title = `${post.title} – FlipUp Deals Blog`;
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      dateModified: modified,
+      inLanguage: 'de-DE',
+      author: { '@type': 'Person', name: AUTHOR },
+      publisher: { '@type': 'Organization', name: 'FlipUp Deals', url: `${SITE}/` },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      articleSection: post.category,
+      keywords: post.tags.join(', '),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Blog', item: `${SITE}/blog/` },
+        { '@type': 'ListItem', position: 2, name: post.title, item: url },
+      ],
+    },
+  ];
+  if (r.faq) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: r.faq.items.map(it => ({ '@type': 'Question', name: it.question, acceptedAnswer: { '@type': 'Answer', text: it.answerText } })),
+    });
+  }
+  const extraMeta = `  <meta property="article:published_time" content="${post.date}" />
+  <meta property="article:modified_time" content="${modified}" />
+  <meta property="article:section" content="${esc(post.category)}" />
+  <meta property="article:author" content="${esc(AUTHOR)}" />
+`;
+  const head = pageHead({ title, description: post.description, urlPath: `/blog/${post.slug}.html`, ogType: 'article', extraMeta, jsonLd });
+  const related = relatedPosts(post, all);
+
+  const main = `<main id="main" class="post-page">
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/blog/">Blog</a></li>
+        <li aria-current="page">${esc(post.title)}</li>
+      </ol>
+    </nav>
+
+    <div class="post-layout">
+
+      <article class="post">
+        <header class="post-header">
+          <p class="post-category"><a class="chip chip--link" href="/blog/#kategorie=${esc(post.categorySlug)}">${esc(post.category)}</a></p>
+          <h1 class="post-title">${esc(post.title)}</h1>
+          <p class="post-lede">${esc(post.description)}</p>
+          <p class="post-meta post-meta--article">${monogram()}<span>${esc(AUTHOR)}</span><span class="sep" aria-hidden="true">·</span><time datetime="${post.date}">${formatDate(post.date)}</time><span class="sep" aria-hidden="true">·</span><span>${post.minutes} Min. Lesezeit</span>${post.updated ? `<span class="sep" aria-hidden="true">·</span><span>Aktualisiert am <time datetime="${post.updated}">${formatDate(post.updated)}</time></span>` : ''}</p>
+        </header>
+
+        <div class="post-cover">
+${coverHtml(post)}
+        </div>
+
+        <details class="toc toc--inline">
+          <summary>Inhalt</summary>
+${tocList(r.toc)}
+        </details>
+
+        <div class="prose post-body">
+${r.bodyHtml}
+        </div>
+
+${post.legal ? '        <p class="legal-note">Dieser Artikel ersetzt keine Rechtsberatung.</p>\n' : ''}${r.faqHtml ? '        ' + r.faqHtml.split('\n').join('\n        ') + '\n' : ''}${r.sourcesHtml ? '        ' + r.sourcesHtml.split('\n').join('\n        ') + '\n' : ''}
+        <footer class="post-footer">
+          <ul class="tags" aria-label="Kategorie und Tags">
+            <li><a class="chip chip--link" href="/blog/#kategorie=${esc(post.categorySlug)}">${esc(post.category)}</a></li>${post.tags.map(t => `
+            <li><span class="chip chip--static">${esc(t)}</span></li>`).join('')}
+          </ul>
+${shareHtml(post, 'below')}
+        </footer>
+      </article>
+
+      <aside class="post-aside" aria-label="Teilen und Inhalt">
+        <div class="post-aside-inner">
+${shareHtml(post, 'aside')}
+          <nav class="toc toc--aside" aria-label="Inhaltsverzeichnis">
+            <p class="toc-title">Inhalt</p>
+${tocList(r.toc)}
+          </nav>
+        </div>
+      </aside>
+
+    </div>
+
+    <aside class="related" aria-labelledby="weitere-artikel">
+      <h2 id="weitere-artikel">Weitere Artikel</h2>
+      <div class="post-grid post-grid--related">
+${related.map(p => postCard(p)).join('\n')}
+      </div>
+    </aside>
+
+    <aside class="post-cta" aria-labelledby="cta-titel">
+      <h2 id="cta-titel">Aktuelle Deals ansehen</h2>
+      <p>Auf FlipUp Deals findest du täglich aktualisierte Angebote aus Online-Shops. Die Links dort sind Affiliate-Links (Werbung).</p>
+      <p><a class="btn" href="/#deals">Aktuelle Deals ansehen</a></p>
+      <p class="post-cta-note"><a href="/about.html">Wie sich FlipUp Deals finanziert</a></p>
+    </aside>
+
+  </div>
+</main>`;
+  return pageShell({ head, header: headerFor(chrome, '/blog/'), footer: chrome.footer, main });
+}
+
+module.exports = { articlePage, shareHtml, readChrome, headerFor, pageHead, pageShell, coverHtml, metaLine, monogram, postCard, categoriesOf, overviewPage, CATEGORY_ORDER };
